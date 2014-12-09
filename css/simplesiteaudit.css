@@ -1,0 +1,400 @@
+/* CSS Document */
+
+
+
+.ToolText{position:relative;} 
+.ToolTextHover{position:relative;} 
+.ToolText span{display: none;} 
+
+.ToolTextHover span{
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 12px;
+  margin-left: 10px;
+  width: 550px; 
+  display:block; 
+  position:absolute;
+  padding: 15px; 
+  border:1px solid lightgray; 
+  top:-2.0em; 
+  left:5px; 
+  background-color:#F0F8FF;
+  color:#2F4F4F;
+  z-index: 1;
+  text-align: left;
+  border-radius:5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
+
+body{
+  background-color: #ffffff;
+}
+
+@media print {
+.noPrint {
+    display:none;
+}
+}
+
+.asterisk {
+  color: red;
+  font-size: 12px;
+  }
+
+.sub {
+  text-align: left;
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 14px;
+  color: brown;
+  margin-left: 140px;
+  }
+  
+.sub1 {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #000080;
+  }
+  
+.sub2 {
+  text-align: left;
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 20px;
+  color: #000000;
+  margin-left: 0px;
+  }
+  
+.h1 {
+  text-align: center;
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 24px;
+  color: #000000;
+  }
+  
+.h2 {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 18px;
+  color: #000000;
+  }
+  
+.h3 {
+  font-weight:bold;
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 14px;
+  color: brown;
+  }
+  
+label {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 12px;
+  color: #000000;
+  }
+  
+small {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: gray;
+  font-size: 11px;
+  }
+  
+.button {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: #000080;
+  border-radius:5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 10px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #CCFFCC;
+}
+
+/*File comparison*/
+.file_input_textbox
+{
+	float: left
+}
+
+.file_input_div
+{
+        position: relative; 
+	width: 250px; 
+	height: 23px; 
+	overflow: hidden;
+}
+
+.file_input_button
+{
+	width: auto; 
+	position: absolute; 
+	border: 1px solid gray;
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: #000080;
+  border-radius:5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #ffffCC;
+}
+
+.file_input_hidden
+{
+	font-size: 45px; 
+	position: absolute; 
+	right: 0px; 
+	top: 0px; 
+	opacity: 0; 
+	filter: alpha(opacity=0); 
+	-ms-filter: "alpha(opacity=0)"; 
+	-khtml-opacity: 0; 
+	-moz-opacity: 0;
+}
+/*File comparison end*/
+
+.block{
+  display: none;
+}
+
+#myform{
+  display: block;
+}
+
+#myform2{
+  display: block;
+}
+
+.view{
+  display: none;
+}
+
+.week{
+  display: none;
+}
+
+.month{
+  display: none;
+}
+
+textarea {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: #000000; /*#4B0082;*/
+  width: 750px;
+  font-size: 10px;
+  border-radius:5px;
+  margin-left: 0px;
+  /*-moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-color: #ccc;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;*/  
+  background-color: #F0F8FF;
+  border-color: #ccc;
+}
+
+select {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: #4B0082;
+  width: 350px;
+  height: 20px;
+  font-size: 12px;
+  border-radius:5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;  
+  background-color: #F0F8FF;
+}
+
+.logheader {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: brown;
+  width: 550px;
+  font-size: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-color: #ffffff;
+  border-radius: 5px;
+  background-color: #F0F8FF;
+  padding: 5px;
+}
+  
+input {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  color: #4B0082;
+  width: 350px;
+  font-size: 12px;
+  border-radius:5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;  
+  background-color: #F0F8FF;
+}
+
+.tab0 {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  width: 750px;
+  min-width: 750px;
+  padding: 15px;
+  vertical-align: top;
+  background-color: #F9FFF9; /*#fbfbfb;*/
+  margin-left: 3px;
+}
+
+.tab1, tr{
+  vertical-align: top;
+}
+
+.tab1 {
+  border: 0px;
+  width: auto;
+  padding: 15px;
+  background-color: #ffffff;
+
+}
+
+.tab2 {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 10px;
+  margin-top: 10px;
+  width: 750px;
+  padding: 15px;
+  min-width: 750px;
+  vertical-align: top;
+  background-color: #fbfbfb;
+  border-collapse: collapse;
+}
+
+#contents {
+  font-family: verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+  font-size: 10px;
+  margin-top: 10px;
+  width: 550px;
+  padding: 15px;
+  min-width: 550px;
+  vertical-align: top;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+.tab3 {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-radius:10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; 
+  width: 420px;
+  min-width: 400px;
+  padding: 10px;
+  margin-top: 15px; 
+  margin-left: 15px;
+  vertical-align: top;
+  text-align: center;
+  background-color: #fbfbfb;
+  /*margin-left: 3px;*/
+}
+
+.tab4 {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-radius:10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; 
+  width: 800px;
+  min-width: 800px;
+  padding: 1px;
+  margin-top: 10px;
+  vertical-align: top;
+  text-align: left;
+  background-color: #fbfbfb;
+  /*margin-left: 3px;*/
+}
+
+.tab5 {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  border-radius:10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; 
+  width: 95%;
+  min-width: 95%;
+  padding: 10px;
+  margin-top: 15px; 
+  margin-left: 15px;
+  vertical-align: top;
+  text-align: center;
+  background-color: #fbfbfb;
+  /*margin-left: 3px;*/
+}
+
+.tab6 {
+  border-style:solid;
+  border-width:1px;
+  border-radius:10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-color: #ccc;
+  width: 800px;
+  min-width: 800px;
+  padding: 10px;
+  margin-top: 15px; 
+  margin-left: 15px;
+  vertical-align: top;
+  text-align: left;
+  background-color: #fbfbfb;
+  /*margin-left: 3px;*/
+}
+
+hr {
+  width: 90%;
+  size: 1px;
+  border-collapse: collapse;
+  color: #ccc;
+  text-align: center;
+}
