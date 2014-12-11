@@ -2,7 +2,6 @@
 header('Content-type: text/html');
 $date = date ("dMy@H:i:s");
 include 'version.php';
-error_reporting (E_ALL ^ E_NOTICE);
 $stop = '';
 
 

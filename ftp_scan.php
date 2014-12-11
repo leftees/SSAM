@@ -6,6 +6,7 @@
   ~  ~ ~  ~ ~   ~~~ ~~~    ~  ~  ~  ~~~   ~ ~ `~' ~~  ~  ~    Multisite
  * 
  * Copyright (C) 2012 Terry Heffernan. All rights reserved.
+ * Copyright (C) 2014 Daniel Ruf. All rights reserved.
  * Technical support: http://simplesiteaudit.terryheffernan.net
  */
 
@@ -16,7 +17,6 @@ $time_limit = 30;
 $logs_dir = '';
 $files = array();
 include 'version.php';
-error_reporting (E_ALL ^ E_NOTICE);
 
 if( !ini_get('safe_mode') ){
   set_time_limit($time_limit); // Adjust this value in the file 'version.php'

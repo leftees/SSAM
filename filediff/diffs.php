@@ -1,6 +1,5 @@
 <?php
 
-error_reporting (E_ALL ^ E_NOTICE);
 /*
 	Ross Scrivener http://scrivna.com
 	PHP file diff implementation

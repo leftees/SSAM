@@ -3,9 +3,10 @@
   _, _ _, _ __, _,  __,    _, _ ___ __,    _, _,_ __, _ ___  
  (_  | |\/| |_) |   |_    (_  |  |  |_    / \ | | | \ |  |   
  , ) | |  | |   | , |     , ) |  |  |     |~| | | | / |  |   
-  ~  ~ ~  ~ ~   ~~~ ~~~    ~  ~  ~  ~~~   ~ ~ `~' ~~  ~  ~   v1.5.4 Multisite
+  ~  ~ ~  ~ ~   ~~~ ~~~    ~  ~  ~  ~~~   ~ ~ `~' ~~  ~  ~    Multisite
  * 
  * Copyright (C) 2012 Terry Heffernan. All rights reserved.
+ * Copyright (C) 2014 Daniel Ruf. All rights reserved.
  * Technical support: http://simplesiteaudit.terryheffernan.net
  */
 include 'version.php';

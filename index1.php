@@ -6,6 +6,7 @@
   ~  ~ ~  ~ ~   ~~~ ~~~    ~  ~  ~  ~~~   ~ ~ `~' ~~  ~  ~    Multisite
  * 
  * Copyright (C) 2012 Terry Heffernan. All rights reserved.
+ * Copyright (C) 2014 Daniel Ruf. All rights reserved.
  * Technical support: http://simplesiteaudit.terryheffernan.net
  */
  
@@ -17,7 +18,6 @@
 */
 
 session_start();
-error_reporting (E_ALL ^ E_NOTICE);
 include 'version.php';
 include 'functions/index1_functions.php';
 //$logs_dir = '../../logs';
