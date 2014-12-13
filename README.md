@@ -13,7 +13,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] use Twitter Bootstrap for a responsive UI
 - [ ] find a new name and domain for the fork
 - [x] check minimum required PHP version with https://github.com/llaville/php-compat-info (`php phpcompatinfo-3.7.0.phar analyser:run --alias current`)
-- [ ] run a OWASP ZAP scan on a preinstalled version
+- [ ] run an OWASP ZAP scan on a preinstalled version
 - [ ] use the PHPMailer library instead of the mail() method for custom mail settings (via SMTP)
 
 ##Planned
