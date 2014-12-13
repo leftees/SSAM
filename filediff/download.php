@@ -21,9 +21,8 @@ $db_server = trim($db_settings[0]); // database Server
 $db_user = trim($db_settings[1]);  // mysql user name
 $dbpass = trim($db_settings[2]);  // mysql password
 $db_name = trim($db_settings[3]);   // Name of database
-        
-    $key = 'let@me@in@NOW';         
-    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($dbpass), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+                
+    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($dbpass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
 
 if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_empty() > 0*/){
@@ -44,8 +43,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_e
 }
 
 if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
-     $key = 'let@me@in@NOW';
-     $decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($ftp_pw), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+     $decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($ftp_pw), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
      $ftp_pw = trim($decrypted);
 }else{
      'Wrong FTP username or password';

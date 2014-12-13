@@ -23,8 +23,7 @@ if(file_exists($dbsettings)){
     $db_pass = trim($file[2]);
     $db_name = trim($file[3]);
 
-    $key = 'let@me@in@NOW';
-    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
     
 $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());

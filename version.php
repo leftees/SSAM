@@ -7,6 +7,8 @@ if (version_compare(PHP_VERSION, '5.3.0') < 0) {
 //SSA version
 $ssa_ver = '1.5.8';
 
+$encryption_key = 'let@me@in@NOW'; //this should be uniquely generated and saved in a generated config file
+
 $debug = false;
 $debug_level = 0;
 

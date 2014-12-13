@@ -1,11 +1,10 @@
 <?php
-
+include '../version.php';
 // Functions start here  
 function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir) {
 
     $date = date ("dMy");
     $time = date("H:i");
-    $key = 'let@me@in@NOW';
 
   if(!file_exists($logs_dir.'/'.$ftp_server)){
      mkdir($logs_dir.'/'.$ftp_server,0777,TRUE);
@@ -14,13 +13,13 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
     $db_settings = fopen($dbsettings, 'w');  
         
         $string = ' '.$db_pass.' '; // note the spaces    
-        $db_pass = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+        $db_pass = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), $string, MCRYPT_MODE_CBC, md5(md5($encryption_key))));
         
     $db_setts = trim($db_server)."\r\n".trim($db_user)."\r\n".trim($db_pass)."\r\n".trim($db_name);
     fwrite($db_settings, $db_setts);
     fclose($db_settings);
     
-        $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+        $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
         $db_pass = trim($decrypt);    
         $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
 
@@ -31,7 +30,7 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
     mysql_query($query)or die('MySql ERROR3! '.mysql_error());
 
         $string = ' '.$ftp_pass.' '; // note the spaces    
-        $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+        $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), $string, MCRYPT_MODE_CBC, md5(md5($encryption_key))));
 
     $query ="INSERT INTO $settings_table (
         site_URL,

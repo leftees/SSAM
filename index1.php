@@ -80,9 +80,8 @@ if($_GET['check_db_details'] != 'Y'){
         $db_user = trim($file[1]);
         $db_pass = trim($file[2]);
         $db_name = trim($file[3]);
-        
-    $key = 'let@me@in@NOW';         
-    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+                 
+    $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
     }
  }
@@ -110,8 +109,7 @@ if(is_resource ($result) && !$_POST['submit']){
      mysql_close($con)or die(mysql_error());
    
      if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
-         $key = 'let@me@in@NOW';
-         $decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($ftp_pass), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+         $decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($ftp_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
          $ftp_pass = trim($decrypted);
      }
 }
