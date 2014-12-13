@@ -1,5 +1,8 @@
 <?php
 //make this the config file?
+if (version_compare(PHP_VERSION, '5.3.0') < 0) {
+	exit("We need at least PHP 5.3.0");    
+}
 
 //SSA version
 $ssa_ver = '1.5.8';
@@ -28,12 +31,12 @@ switch ($debug_level) {
         break;
 }
 
-//prepare methods for backtracing and printing the stacktrace
-function show_backtrace($debug){
+//prepare methods for backtracing
+function generate_backtrace($debug){
 if($debug) debug_backtrace();
 }
 
-function show_backtrace($debug){
+function print_backtrace($debug){
 if($debug) debug_print_backtrace();
 }
 

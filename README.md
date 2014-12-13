@@ -5,13 +5,16 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 
 
 ##Todo
-- [ ] change the code from Mysql to PDO (removes the deprecated notices)
+- [ ] change the code from MySQL to PDO (removes the deprecated notices)
 - [ ] use a config.sample.php file for individual settings at setup
 - [ ] generate a unique key for the encryption/decryption
 - [ ] move often used methods to another file and include it (DRY)
 - [ ] comment/document all methods (preparation for PHPDoc)
 - [ ] use Twitter Bootstrap for a responsive UI
 - [ ] find a new name and domain for the fork
+- [x] check minimum required PHP version with https://github.com/llaville/php-compat-info (`php phpcompatinfo-3.7.0.phar analyser:run --alias current`)
+- [ ] run a OWASP ZAP scan on a preinstalled version
+- [ ] use the PHPMailer library instead of the mail() method for custom mail settings (via SMTP)
 
 ##Planned
 - [ ] create a dashboard for an overview of all monitored websites
@@ -20,3 +23,4 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] remote deploy of solutions/firewalls like [NinjaFirewall](ninjafirewall.com)
 - [ ] remote emergency functions (maintenance mode, admin user)
 - [ ] use the MVC pattern
+- [ ] update utility (check, update, upgrade, ...)
