@@ -14,7 +14,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] find a new name and domain for the fork
 - [x] check minimum required PHP version with https://github.com/llaville/php-compat-info (`php phpcompatinfo-3.7.0.phar analyser:run --alias current`)
 - [ ] run an OWASP ZAP scan on a preinstalled version
-- [ ] use the PHPMailer library instead of the mail() method for custom mail settings (via SMTP)
+- [ ] use the PHPMailer library or own class instead of the mail() method for custom mail settings (via SMTP)
 
 ##Planned
 - [ ] create a dashboard for an overview of all monitored websites
@@ -24,3 +24,4 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] remote emergency functions (maintenance mode, admin user)
 - [ ] use the MVC pattern
 - [ ] update utility (check, update, upgrade, ...)
+- [ ] support for SSH/SFTP
