@@ -1,0 +1,67 @@
+Changes between V1.0 and 1.4:
+-----------------------------
+
+Version1.4
+      *Form layout changed to accommodate a wider display of SSA log file.
+
+      *SSA log display was a simple copy of the SSA log file contents loaded 
+       into a textarea. It is now displayed in a more user-friendly manner.
+
+      *The example form is no longer required. Instead, the real form will auto-fill
+       with example fields on when first run.
+
+      *Added the ability to view the Cron log file. This consists of a read only 
+       textarea. Further formatting is impractical due to the unknown content added by 
+       the Cron process. Path to Cron file must be entered in the appropriate field.
+
+      *All responses now appear to the right of the form.
+      
+      *Fixed bug where the info icons stayed on top when the info pop-up appeared.            
+
+Version1.3
+      *File 'simplesiteaudit_settings.php' - name changed to 'index.php'. Access 
+       with URL: http://domain.com/ssa/ or http://domain.com/ssa/index.php
+      
+      *As direct access to 'includes/clear_log.php' would instantly clear the log
+       file, without warning, the file can now only be accessed via 'index.php'. 
+       Page now redirects to index.php.
+
+      *The 'Empty the log' button was a 1-click operation, which left the log file
+       open to accidental emptying. Now the button needs to be requested via the 
+       red question mark button.
+
+      *The 'Create log' checkbox is now working correctly.
+
+Version1.2:
+      *Changed the file names to all lower case. If upper case  characters are
+       included, it can cause problems, like 404 errors,where it's being read in
+       a case-sensitive manner. The file names themselves, must not be changed, as 
+       they are referenced from one to the other.
+  
+      *Where the user does not have access to offline directories. Advice has been 
+       added to the readme file and the top info icon. 
+  
+      *Added a button to empty the log file (a 1-click operation which might need
+       safeguarding at some point).
+       
+      *Added a button to display the file contents. These only appear after the
+       log file is created, i.e. when the ssa script is first run.
+
+
+Version1.1:
+      *The option to show/hide the example form, which actually consists of some
+       read only text boxes and are copyable. It will now appear side by side with
+       the real form.
+      
+      *The field, 'Directory being monitored' is now a drop-down menu that lists
+       all directories in directoryToMonitor. So it's even easier to find the
+       directory of your choice. On large sites this element can take several seconds
+       to fully load.
+      
+      *I've added an option to create a log file and a further option to clear it.
+      
+      *Confirmation responses appear under the buttons.
+             
+
+Version1.0
+      *First release
