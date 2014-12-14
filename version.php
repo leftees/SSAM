@@ -7,8 +7,6 @@ if (version_compare(PHP_VERSION, '5.3.0') < 0) {
 //SSA version
 $ssa_ver = '1.5.8';
 
-$encryption_key = 'let@me@in@NOW'; //this should be uniquely generated and saved in a generated config file
-
 $debug = false;
 $debug_level = 0;
 
@@ -42,6 +40,12 @@ function print_backtrace($debug){
 if($debug) debug_print_backtrace();
 }
 
+/********************************************************************
+ start editing the following values for your own custom configuration
+*********************************************************************/
+
+$encryption_key = 'let@me@in@NOW'; //this should be uniquely generated and saved in a generated config file
+
 // $logs_dir. This folder will contain your db access details. Therefore, it should either be in an off-line folder
 //  (e.g. '../../logs') or in a password protected folder if you want it web accessible.
 $logs_dir = '../../ssam_logs';
@@ -58,4 +62,5 @@ $time_limit = 60;
 // If you run in to memory problems, $memory_limit allows the adjustment of maximum allowed memory usage
 // for the duration of the script - measured in megabytes
 $memory_limit = 512;
+
 ?>

@@ -10,7 +10,7 @@
  * Technical support: http://simplesiteaudit.terryheffernan.net
  */
 
-
+// the only file which should not be protected with the new login system
 header('Content-type: text/html');
 $date = date ("dMy@H:i:s");
 $files = array();
