@@ -12,8 +12,6 @@
 
 
 session_start();
-$ssa_ver = '';
-$logs_dir = '';
 $date = date('dMy H:i:s');
 
 include 'version.php';

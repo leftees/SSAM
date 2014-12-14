@@ -1,5 +1,5 @@
 <?php
-include '../version.php';
+//include '../version.php'; //not needed as version.php is included before index1_functions.php
 // Functions start here  
 function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir) {
 
@@ -118,6 +118,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     mysql_select_db($db_name, $con)or die(mysql_error());
 
     // Create table
+	// the path and filename fields should be much longer
     $newlist_sql = "CREATE TABLE IF NOT EXISTS $newlist_table
     (
     id int NOT NULL AUTO_INCREMENT,
@@ -146,7 +147,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     )";
     // Execute query
     mysql_query($settings_sql,$con)or die('Failed to create settings table<br>'.mysql_error());
-
+	// some fields should be longer
     $site_sql = "CREATE TABLE IF NOT EXISTS $site_table
     (
     id int NOT NULL AUTO_INCREMENT,
@@ -165,7 +166,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     )";
     // Execute query
     mysql_query($site_sql,$con)or die('Failed to create site table<br>'.mysql_error());
-
+	//the file field should be mouch longer
     $log_sql = "CREATE TABLE IF NOT EXISTS $log_table
     (
     id int NOT NULL AUTO_INCREMENT,

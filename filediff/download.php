@@ -1,5 +1,4 @@
 <?php 
-$logs_dir = '';
 include '../version.php';
 
 $file = $_GET['file'];

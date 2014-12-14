@@ -13,8 +13,6 @@
 
 header('Content-type: text/html');
 $date = date ("dMy@H:i:s");
-$time_limit = 30;
-$logs_dir = '';
 $files = array();
 include 'version.php';
 
@@ -551,8 +549,8 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                                  $item['day'],
                                  $item['year'],
                                  $item['filename']) = $parts;
-
-                                 $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file?
+								 // we could need some timestamp and the year in the database => new db scheme
+                                 $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file? this is not used actually
 
                                 if($file != $item['filename']){
                                     $items[] = $item;
