@@ -1,0 +1,148 @@
+Changes V1.5.0 to 1.5.8:
+-----------------------------
+
+VERSION 1.5.8 - Additions/changes
+
+Overall status
+I have added a new table to index.php which will list your monitored sites with their overall status (Missing, Added, Modified etc). It covers the following time periods:
+Last 24 hours
+Last 7 days
+Last 30 days
+
+By default, the 24 hour table will always be visible at the bottom of the page. From there, a button click will activate the other two time periods. Thanks go to Mick for this suggestion.
+
+Fields for files/directories to ignore
+Now that it is possible to add a path to file or directory in these fields, I have changed the original text boxes. They now consist of expandible text areas, making it much easier to enter and read your ignored items. The field can now consist of either a comma or linefeed separated list. Thanks go to Simone for this suggestion.
+
+Error responses
+Some error descriptions were not very clear. I have tried to make them more meaningful
+
+Convenience buttons
+I have added some buttons to the page, index.php. These are intended to help navigate and search the SSA log. They include the likes of 'Page down', 'Page Up' and a search facility for those of you who keep a large SSA log. These buttons will only be visible if the SSA log exists.
+
+
+VERSION 1.5.7 - Additions/changes
+
+Some bug fixes and background stuff.
+
+
+VERSION 1.5.6 - Additions/changes
+
+$remote_sys_type is now an array
+As described below, for version 1.5.5, the remote_sys_type value in file 'version.php' can now be more than 1 value in a comma separated list. This variable is now processed as an array.
+
+I've changed this because some remote Linux servers are not returning the standard FTP response to the 'SYST' command. If you find that you are in this situation and you are sure that the remote server is Linux based, just add the 'SYST' response to the comma separated list in 'version.php'.
+
+If you don't know what your remote server response is, find the file 'sys_type_TEST.php' (in the SSA directory) and after adding your FTP access details to the top of the file, upload it to the master site and run it. You should see the server's response.
+
+
+SSA Log - 'Added' files can now be downloaded
+As is already the case with 'Modified' files, you will now be able to download 'Added' files for examination.
+
+SSA log print tidied up
+Some buttons were appearing in the output. This has now been corrected.
+
+Removed unnecessary white space between Cron log display and SSA log display when both are visible.
+
+Corrected auto-scroll feature for Cron log display
+
+Added 3rd option to 'Ignore directories' field 
+It is now possible for SSA to ignore all files AND folders in a specified directory. Simply add the path to the directory (including root directory name, followed by an asterisk, e.g root_dir_name/folder1/folder2/folder3* - all files and folders in folder3 will be ignored.
+
+VERSION 1.5.5 - Additions/changes
+
+*Linux and Windows processing separated:
+ In this version, I have split the processing for target sites on Linux and Windows servers. This allows for scan time speeds  to be significantly reduced for target sites hosted on Linux servers. No change for target sites on Windows servers.
+
+ Due to the way Windows servers respond to the FTP 'LIST' command, i.e. in a non-recursive manner, it was not possible to  include this decrease in scan time for target sites on Windows servers.
+
+ The script identifies target server types by sending the FTP 'SYST' command. The standard response from a Linux server is:  '215 UNIX Type: L8'. The script assumes that a different response is from a Windows server.
+
+ If you find that the script fails, and you are sure that the target site is hosted on a Linux server, take the following  action:
+
+ First, run the script manually from the page index.php. Even if the script fails, it should still show the response from the  'SYST' command, e.g. 'Remote system: (215 UNIX emulated by FileZilla)' and copy everything between the brackets. Then open  the file 'version.php' and change the value for the variable '$remote_sys_type'. It should end up looking something like  this: $remote_sys_type = '215 UNIX emulated by FileZilla';
+ or whatever your response was to the 'SYST' command. Then save the file, upload it, and run the script again.
+
+ Other examples of possible 'SYST' responses:
+ 215 UNIX Type: L8 Version: BSD-44
+ 215 NetWare system type.
+ 215 MACOS Peter's Server
+ 215 AmigaOS
+
+*Spaces in directory names and empty directories:
+ In previous versions the script did not detect changes in directories where the directory name contained space characters.  This has been rectified. 
+
+*SSA log display time fixed:
+ Some previous versions contained a bug in the process that displays the SSA log file. This resulted in the display taking  much longer to appear than it should have done. This has also been rectified.
+
+*Field: 'List of files to ignore':
+ This field name has been changed to 'List of files and/or file extensions to ignore'
+
+ This can now consist of a list of comma separated list of file names, including the file extension, file extension only, or  a combination of path to folder and file extension.
+ 
+ Be careful with the selection of file names. If, for example, if file name 'index.php' is entered, all files with that name,  throughout the site, will be ignored.
+
+ If you want to exculde catagories of files, you can mix in some file extensions (including the dot), e.g. your list might  look something like this: robots.txt,.gif,.jpg,filename.doc,.pdf
+
+ If you wish to ignore certain file types in a specific folder only, you can add the path to the folder and the extension to  ignore. The path must include the site\'s root directory name, e.g. htdocs - your entry to this field might look like this:
+ htdocs/folder1/folder2/folder3/.jpg
+ only file type .jpg will be ignored and only in folder3. All other .jpg files will be monitored. 
+ 
+ It is possible to mix in all of the above options.
+
+*Field: 'List of directories to ignore':
+ This can now consist of a list of comma separated directory names and/or paths to a directory.
+
+ Be careful with the selection of directory names. If, for example, the ‘images’ directory is entered, all files and folders in the ‘images’ directory and all directories with that name, throughout the site, Including their sub-folders, will be ignored.
+ 
+ If you wish to ignore a specific folder only, you can add the path to the folder. The path must include the site's root  directory name, e.g. htdocs - your entry to this field might look like this: htdocs/folder1/folder2/folder3
+
+ All files in folder3 will be ignored. Any other directory that is named 'folder3' and all sub-folders in folder3 will be   monitored.
+
+*Other minor changes:
+ New 'Refresh' button on the preferences form and SSA log display. Other changes are all background stuff.
+
+VERSION 1.5.4
+*SSAM is now compatible with the latest version of PHP, up to version 5.4.x - Some problems with the drop-down menus existed with the latest version, but are now fixed.
+
+*The 'Compare files' button on page 'index.php' has been renamed 'Utilities'. This is where you'll find some useful tools. 
+
+*The field 'email to alert:' has been extended to 1024 characters. 
+
+*Added a new file (version.php). This contains the SSAM version number, for my convenience. However, it also contains the default value for the logs directory, where db access details are stored. If you wish to place your log files in a different directory, simply amend this file. I would recommend using an offline directory or your password protected SSA directory. The default setting in file 'version.php' is: ../../db_settings
+
+VERSION 1.5.3
+*I have added a new field to the preferences page: "List of files to rename:"
+The field consists of a list of comma separated file names to be re-named on discovery. If found, these files will be re-named by giving them a " _renamed.by.ssam" extension. This feature might be useful where you know of certain file names that have caused you problems in the past. Re-naming the file as soon as it is detected, will prevent it being used for malicious purposes. An email alert will be sent on detection.
+
+*I have added some extra utilities, as follows:
+Google malware check - uses google safe browsing diagnostic page.
+
+Check your sites with the VirusTotal API. Checks if your site is black-listed on up to 30+ databases, including MalwareDomainList, Yandex Safebrowsing, MalwarePatrol, Phishtank, SpyEyeTracker and many others.
+
+SiteTruth Ratings Summary. SiteTruth ratings are based on public or commercially available information, automatically gathered from multiple sources including public records and business credit ratings. They reflect the legal and commercial legitimacy of the business, not consumer opinion or satisfaction.
+
+
+VERSION 1.5.2
+*Prior to this version, SSAM would not perform a recursive scan on a Windows/IIS server. It would only scan the root,  or nominated directory. SSAM is now compatible with Windows/IIS and will perform a full recursive scan.
+
+*I have added the ability to ignore directories during the scan. This can be useful on very large sites or with        password protected directories, where scanning may not be necessary.
+
+*The time taken to scan a site has been decreased. Especially where the user has nominated directories to be ignored.
+
+
+
+VERSION 1.5.1:
+*Added a file comparison utility, accessible via a new button on the 'Preferences' page (index.php)
+      
+*Added ability to download modified files from the SSAM log display. This will allow the user to download to local      machine, for eventual comparison with a backed up copy, using the file comparison utility mentioned above. Any request to download that receives an HTTP error, will not be available for download. E.g. file not found or password           protected. 
+      
+*Changed FTP/DB text boxes to password boxes on the setup page (index1.php) See 'readme.html'
+
+*Changed info icons on all pages from onHover to onClick event. User request. onHover action was becoming a little      tedious and I had to agree with him.
+
+*Fixed most of the Internet Explorer CSS bugs in v1.5.0 
+             
+
+VERSION 1.5.0
+*First release

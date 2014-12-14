@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+<title>Upload form</title>
+<link href="../css/simplesiteaudit.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="../validation/validate.js"
+    type="text/javascript" xml:space="preserve"></script>
+</head>
+<body>
+<p class="sub2" style="text-align:left;"><font color="brown">SimpleSiteAudit</font> Utilities
+    <br><label>Please be aware that these utilities are not guaranteed to be 100% accurate. They should be regarded as indications only.</label></p>
+<input type="button" id="back" onclick="window.location.href='../index.php'" style="width: auto; background-color: #ffffff;" name="back" title="Back to Preferences form" alt="Back to Preferences form" value="Back">
+
+<table class="tab1"><tr><td>
+<table class="tab3"><tr><td>
+
+<p class="sub2" style="text-align:center;">File comparison utility</p>
+<p class="sub1" style="text-align:center;">Please select 2 text-based files for comparison<br>
+(e.g. files with extensions: .txt, .php, .asp, .html etc.)</p>
+            
+<!-- IMPORTANT:  FORM's enctype must be "multipart/form-data" -->
+<form name="form" target="_blank" method="post" action="upload-page.php" enctype="multipart/form-data">
+  <input style="border: 1px solid gray;background-color: #F0F8FF;" class="button" name="filesToUpload1" id="filesToUpload1" type="file" onchange="javascript: document.getElementById('filesToUpload1').value = this.value" size="20"><br>
+  <input style="border: 1px solid gray;background-color: #F0F8FF;" class="button" name="filesToUpload2" id="filesToUpload2" type="file" onchange="javascript: document.getElementById('filesToUpload2').value = this.value" size="20"><br>
+  <p><label>Files will be deleted from the server after comparison:</label></p>
+  <p><input style="width: auto;background-color: #F0F8FF;" class="button" name="submit" type="submit" value="Upload and compare files"><br><label>(Opens a new tab/window)</label></p>
+  </form>
+</td></tr>
+</table>
+            
+<table class="tab3"><tr><td>
+<p class="sub2" style="text-align:center;">SiteTruth Ratings Summary</p>
+<form name="google" target="_blank" method="GET" action="http://www.sitetruth.com/fcgi/ratingsummary.fcgi">
+<label>Enter URL for site to be checked:</label><br>
+<input type="text" id="url" name="url" value="" size="20">
+<input type="hidden" id="key" name="key" value="guest" size="20">
+<input style=" width: auto;" type="submit" title="Submit to google malware check." value="Submit">
+<br><label>(Opens in new window/tab<br>When the page loads, click on 'Rating details')</label>
+</form></td></tr></table>
+            
+</td><td>
+      
+<table class="tab3"><tr><td>
+<p class="sub2" style="text-align:center;">Google malware check</p>
+<form name="google" target="_blank" method="GET" action="http://www.google.com/safebrowsing/diagnostic">
+<label>Enter URL for site to be checked:</label><br>
+<input type="text" id="site" name="site" value="" size="20">
+<input style=" width: auto;" type="submit" title="Submit to google malware check." value="Submit">
+<br><label>(Opens in new window/tab)</label>
+</form></td></tr></table>
+    
+<table class="tab3"><tr><td>
+<p class="sub2" style="text-align:center;">Check your sites with VirusTotal API<br>
+<label>Checks if your site is black-listed on 30+ databases.<br><a href="javascript: window.open('../virus_total/instructions.html','instructions','status=0,toolbar=0,height=400,width=600')">Usage instructions</a></label></p>
+<form name="vt" target="_blank" method="POST" action="../virus_total/VirusTotalApiV2Test.php">
+<label>Enter URL for site to be scanned:</label><br>
+<input type="text" id="url" name="url" value="" size="20"><br>
+<label>Enter your VirusTotal API key:</label><br>
+<input type="text" id="api" name="api" value="" size="20">
+<input style=" width: auto;" type="submit" title="Submit to scan the site." value="Submit">
+<br><label>(Opens in new window/tab)</label>
+</form></td></tr></table>
+</td></tr></table>
+
+<script language="JavaScript" type="text/javascript" xml:space="preserve">//<![CDATA[
+    var frmvalidator  = new Validator("form"); 
+    frmvalidator.addValidation("filesToUpload1","req","Please select 2 files.");                                       
+    frmvalidator.addValidation("filesToUpload2","req","Please select 2 files.");
+    //]]>
+</script>    
+    
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<!--
+  _, _ _, _ __, _,  __,    _, _ ___ __,    _, _,_ __, _ ___  
+ (_  | |\/| |_) |   |_    (_  |  |  |_    / \ | | | \ |  |   
+ , ) | |  | |   | , |     , ) |  |  |     |~| | | | / |  |   
+  ~  ~ ~  ~ ~   ~~~ ~~~    ~  ~  ~  ~~~   ~ ~ `~' ~~  ~  ~   Multisite
+ * 
+ * Copyright (C) 2012 Terry Heffernan. All rights reserved.
+ * Technical support: http://simplesiteaudit.terryheffernan.net
+-->
+<head>
+<link href="css/simplesiteaudit.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Language" content="en-gb">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>README</title>
+
+ <script type="text/javascript">// <![CDATA[
+ function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+// ]]></script>
+<style>
+    .sub5{
+          font-family: Calibri, verdana, geneva, helvetica, arial, sunsans-regular, sans-serif;
+          font-size: 12px;
+          margin-left: 10px;
+          color: #000;
+    }
+    
+</style>
+</head>
+
+<body>
+
+<p class="sub2"><font color="#A52A2A">SimpleSiteAudit - Updates and <a href="#installation">Installation</a>
+
+<input class="noPrint" type="button" id="print" onclick="printDiv('printableArea')" style="width: auto; background-color: #ffffff;" name="print" alt="Print" value="PRINT">
+<input type="button" id="close" onclick="self.close()" style="width: auto; background-color: #ffffff;" name="close" alt="Close this window" value="CLOSE"></p>
+
+<br>
+
+</font>
+
+<div id="printableArea" style="width: 774px; height: 1971px">
+<h1>Updates</h1>
+
+<font color="#A52A2A">
+
+<h3>VERSION 1.5.8 - Additions/changes<br>
+<br>
+Overall status<br>
+</font><font face="Calibri"><span style="font-size: 9pt; font-weight: 400">I 
+have added a new table to index.php which will list your monitored sites with 
+their overall status (Missing, Added, Modified etc). It covers the following 
+time periods:<br>
+Last 24 hours<br>
+Last 7 days<br>
+Last 30 days<br>
+<br>
+By default, the 24 hour table will always be visible at the bottom of the page. 
+From there, a button click will activate the other two time periods. These tables 
+become populated after the next script run.Thanks go 
+to Mick for this suggestion.</span></font><font color="#A52A2A"><br>
+<br>
+Fields for files/directories to ignore<br>
+</font><font face="Calibri" style="font-size: 9pt; font-weight: 400">Now that it 
+is possible to add a path to file or directory in these fields, I have changed 
+the original text boxes. They now consist of expandable text areas, making it 
+much easier to enter and read your ignored items. The field can now consist of 
+either a comma or linefeed separated list. Thanks go to Simone for this 
+suggestion.</font><font color="#A52A2A"><br>
+<br>
+Error responses<br>
+</font><span style="font-weight: 400">
+<font face="Calibri" style="font-size: 9pt">Some error descriptions were not 
+very clear. I have tried to make them more meaningful</font></span><font color="#A52A2A"><br>
+<br>
+Convenience buttons<br>
+</font><span style="font-weight: 400">
+<font face="Calibri" style="font-size: 9pt">I have added some buttons to the 
+page, index.php. These are intended to help navigate and search the SSA log. 
+They include the likes of 'Page down', 'Page Up' and a search facility for those 
+of you who keep a large SSA log. These buttons will only be visible if the SSA 
+log exists.</font></span></h3>
+
+<p>&nbsp;</p>
+
+<font color="#A52A2A">
+
+<h3>VERSION 1.5.7 - Additions/changes<br>
+<br>
+Some bug fixes and background stuff.</h3>
+
+<p>&nbsp;</p>
+
+<h3>VERSION 1.5.6</h3>
+
+<h4>$remote_sys_type is now an array</h4>
+<p class="sub5">As described below, for version 1.5.5, the remote_sys_type value in file 'version.php' 
+can now be more than 1 value in a comma separated list. This variable is now 
+processed as an array.</p>
+
+<p class="sub5">I've changed this because some remote Linux servers are not returning the 
+standard FTP response to the 'SYST' command. If you find that you are in this 
+situation and you are sure that the remote server is Linux based, just add the 'SYST' 
+response to the comma separated list in 'version.php'. </p>
+
+<p class="sub5">If you don't know what your remote server response is, find the file 'sys_type_TEST.php' 
+(in the SSA directory) and after adding your FTP access details to the top of 
+the file, upload it to the master site and run it. You should see the server's 
+response.</p>
+
+<h4>Script time-out value for large sites</h4>
+<p class="sub5">The default value for set_time_limit() in the file 'ftp_scan.php' is 60 
+seconds. This can be adjusted via the file 'version.php'. Just in case you 
+experience time-outs when running the script.</p>
+
+<h4>SSA Log - 'Added' files can now be downloaded</h4>
+<p class="sub5">As is already the case with 'Modified' files, you will now be able to download 
+'Added' files for examination.</p>
+
+<h4>SSA log print tidied up</h4>
+<p class="sub5">Some buttons were appearing in the output. This has now been corrected.</p>
+
+<h4>Removed unnecessary white space between Cron log display and SSA log display 
+when both are visible</h4>
+
+<h4>Corrected auto-scroll feature for Cron log display</h4>
+
+<h4>Added 3rd option to 'Ignore directories' field</h4>
+<p class="sub5">It is now possible for SSA to ignore all files AND folders in a specified 
+directory. Simply add the path to the directory (including root directory name, followed by 
+an asterisk, e.g root_dir_name/folder1/folder2/folder3* - all files and folders 
+in folder3 will be ignored.</p>
+<br>
+<h3>VERSION 1.5.5</h3>
+
+<h4>Linux and Windows processing separated</h4><p class="sub5">
+In this version, I have split the processing for target sites on Linux and 
+Windows servers. This allows for scan time speeds to be significantly reduced for target sites 
+hosted on Linux servers. No change for target sites on Windows servers.</p>
+
+<p class="sub5">Due to the way Windows servers respond to the FTP 'LIST' command, i.e. in a 
+non-recursive manner, it was not possible to include this decrease in scan time 
+for target sites on Windows servers.</p>
+
+<p class="sub5">The script identifies target server types by sending the FTP 'SYST' command. 
+The standard response from a Linux server is: 
+'215 UNIX Type: L8'. The script assumes that a different response is from a 
+Windows server.</p>
+
+<p class="sub5">If you 
+find that the script fails, and you are sure that the target site is hosted on a 
+Linux server, take the following action:</p>
+
+<p class="sub5">First, run the script manually from the page index.php. Even if the script 
+fails, it should still show the response from the 'SYST' command, e.g. 'Remote 
+system: (215 UNIX emulated by FileZilla)' and copy everything between the 
+brackets. Then open the file 'version.php' and change the value for the variable 
+'$remote_sys_type'. It should end up looking something like this: $remote_sys_type 
+= '215 UNIX emulated by FileZilla';<br>
+or whatever your response was to the 'SYST' command. Then save the file, upload 
+it, and run the script again.</p>
+
+<p class="sub5">Other 
+examples of possible 'SYST' responses:</p>
+
+<p class="sub5">215 UNIX Type: L8 Version: BSD-44<br>
+215 NetWare system type.<br>
+215 MACOS Peter's Server<br>
+215 AmigaOS</p>
+
+<h4>Spaces in directory names and empty directories</h4>
+<p class="sub5">In previous versions the script did not detect changes in directories where the 
+directory name contained space characters. This has been rectified. </p>
+
+<h4>SSA log display time fixed</h4>
+<p class="sub5">Some previous versions contained a bug in the process that displays the SSA log 
+file. This resulted in the display taking much longer to appear than it should 
+have done. This has also been rectified.</p>
+
+<h4>Site names containing the dash character.</h4>
+<p class="sub5">Previous versions were a little buggy when the remote site name contained a dash 
+character. One of the side effects made it impossible to clear the SSA log from 
+the control panel. This has been rectified.</p>
+
+<h4>Field: 'List of files to ignore'</h4>
+<p class="sub5">This field name has been changed to 'List of files and/or file extensions to ignore'<br /><br />This 
+can now consist of a list of comma separated list of file names, including the file extension, 
+file extension only, or a combination of path to folder and file extension.
+Be careful with the selection of file names. If, for example, 
+if file name 'index.php' is entered, all files with that name, throughout the 
+site, will be ignored.<br><br>
+  If you want to exculde catagories of files, you can mix in some file extensions (including the dot), e.g. your list might look something like this:
+  robots.txt,.gif,.jpg,filename.doc,.pdf</p>
+<p class="sub5">If you wish to ignore certain file types in a specific folder only, you can add the path to the folder and the extension to ignore. 
+  The path must include the site\'s root directory name, e.g. htdocs - your entry to this field might look like this:<br>htdocs/folder1/folder2/folder3/.jpg<br> 
+  only file type .jpg will be ignored and only in folder3. All other .jpg files will be monitored. </p>
+<p class="sub5">It is possible to mix in all of the above options.</p>
+<h4>Field: 'List of directories to ignore'</h4>
+<p class="sub5">This can now consist of a list of comma separated directory names and/or 
+paths to a directory.<br />
+  Be careful with the selection of directory names. If, for example, the 
+  ‘images’ directory is entered, all files and folders in the ‘images’ directory 
+  and all directories with that name, throughout the site, Including their 
+  sub-folders, will be ignored.</p>
+<p class="sub5">If you wish to ignore a specific folder only, you can add the path to the 
+  folder. The path must include the site's root directory name, e.g. htdocs - your entry to this field might look like this:
+htdocs/folder1/folder2/folder3<br>All files in folder3 will be ignored. Any other directory that is named  'folder3' and all sub-folders
+in folder3 will be monitored.</p>
+<h4>Other minor changes</h4>
+
+<p class="sub5">New 'Refresh' button on the preferences form and SSA log display. Other 
+changes are all background stuff.</p><br>
+
+<h3>VERSION 1.5.4</h3>
+
+<p class="sub5">SSAM is now compatible with the latest version 
+        of PHP, up to version 5.4.x - Some problems with the drop-down menus existed 
+        with previous versions, but are now fixed.</p>
+<p class="sub5">
+    The 'Compare files' button on page 'index.php' has been renamed 'Utilities'. This is where you'll find some useful tools.
+</p>
+<p class="sub5">
+The field 'email to alert:' has been extended to 1024 characters.
+</p>
+
+<p class="sub5">Added a new file (version.php). This contains the SSAM version number, for my 
+    convenience. However, it also contains the default value for the 'logs' directory, 
+    where db access details are stored. If you wish to place your db access details in a 
+    different directory, simply amend the value for '$logs_dir' in this file. I would recommend using an offline 
+    directory or your password protected, SSA directory. The default setting for new installations in the file 
+    'version.php' is: ../../logs - this will place it offline (no web access) in a directory called logs.</p><br>
+
+<h3>VERSION 1.5.3</h3>
+
+<p class="sub5">I have added a new field to the preferences page: &quot;List of files to rename:&quot;</p>
+
+<p class="sub5">This field consists of a list of comma separated file names to be re-named on 
+discovery. If found, these files will be re-named by giving them a &quot; _renamed.by.ssam&quot; 
+extension. This feature might be useful where you know of certain file names 
+that have caused you problems in the past. Re-naming the file as soon as it is 
+detected, will prevent it being used for malicious purposes. An email alert will 
+be sent on detection.</p>
+
+<p class="sub5">I have added some extra utilities, as follows:<br>
+<b>Google malware check</b> - uses google safe browsing diagnostic page.<br>
+<b>Check your sites with the VirusTotal API</b>. Checks if your site is 
+black-listed on up to 30+ databases, including MalwareDomainList, Yandex 
+Safebrowsing, MalwarePatrol, Phishtank, SpyEyeTracker and many others.<br>
+<b>SiteTruth Ratings Summary</b>. SiteTruth ratings are based on public or 
+commercially available information, automatically gathered from multiple sources 
+including public records and business credit ratings. They reflect the legal and 
+commercial legitimacy of the business, not consumer opinion or satisfaction.</p><br>
+
+<h3>VERSION 1.5.2</h3>
+
+<p class="sub5">Prior to this version, SSAM would not perform a recursive scan on a Windows/IIS server. It would only scan the root, or nominated directory. SSAM is now compatible with Windows/IIS and will perform a full recursive scan.
+<br><br>
+I have added the ability to ignore directories during the scan. This can be useful on very large sites or with password protected directories, where scanning may not be necessary.
+<br><br>
+The time taken to scan a site has been decreased. Especially where the user has nominated directories to be ignored.</p><br>
+
+
+<h3>VERSION 1.5.1</h3>
+
+<p class="sub5">Added a file comparison utility, accessible via a new button on the 'Preferences' page (index.php). Courtesy of:
+
+Ross Scrivener http://scrivna.com PHP file diff implementation. Much credit goes to...
+
+Paul's Simple Diff Algorithm v 0.1 (C) Paul Butler 2007 http://www.paulbutler.org
+Used and distributed under the zlib/libpng license.<br><br>
+
+Added ability to download modified files from the SSAM log display. This will allow the user to download the file to local machine, for eventual comparison with a backed up copy, using the file comparison utility mentioned above. Any request to download a file that receives an HTTP error, will not be available for download. E.g. file not found or password protected. 
+<br><br>
+Changed FTP/DB text boxes to password boxes on the setup page (index1.php). Even with this change, it is very important to make the SSAM directory password protected, as there will be other sensitive data displayed in the form and passwords are not encrypted when passed to the file index.php.
+<br><br>
+Changed info icons on all pages from onHover to onClick event. User request.
+<br><br>
+Fixed most of the Internet Explorer CSS bugs that were in v1.5.0 - Still not perfect, so IE is not recommended</p><br> 
+
+<a name="installation"></a>
+
+<h1>Installation</h1>
+
+<h4>QUICK START</h4>
+
+<p class="sub5"><b>Recommended browser: Google Chrome.</b> Other browsers may 
+hit problems with the SSAM display.</p> 
+
+<p class="sub5">Download SSA and unzip the contents.
+
+<br>
+Choose a web site that will act as your 'Master' site
+
+Upload all the SSA files to a password-protected directory, directly off the site root, e.g. mastersite.com/ssa<br>
+
+Run the file 'index1.php', submit the settings form for each site you wish to monitor and click 'Finished'.<br>
+This will take you to the preferences form, where, once details are submitted for all your sites, you will be able to run the script and view your logs.
+</p> 
+
+<h4>RESTRICTIONS</h4>
+<p class="sub5">When scanning a site on a Windows/IIS server via FTP, it is not possible to detect changes in file permissions. Therefore, these changes will not appear in the log.</p>
+<p class="sub5">Not so much a restriction, more the nature of the beast. The FTP scan time can vary, depending on, the size of the monitored site, connection speed and conditions between the 'Master' site and the target site. For example, a site with about 5000 files should take about 8 seconds. Larger sites will take longer. It may be necessary, with very large sites, to increase your PHP time-out setting. The time taken should also be considered when setting up Cron jobs. They will need to be spaced out accordingly.
+</p>
+
+<p class="sub5">[update 20Jul2013] Now that many more exclusions are allowed by 
+the script, scan times have increased. In good conditions, a site on Linux 
+server with 5000 
+files will take anywhere between 15 and 20 seconds. This was unavoidable.</p>
+
+<h4>FILE AND DIRECTORY NAMES</h4>
+
+<p class="sub5">All file names must remain as is. The SSA directory can be named anything you like.</p>
+
+
+<h4>FILE PLACEMENT</h4>
+
+<p class="sub5">1. If it doesn't already exist, a 'logs' directory will be created during the set up process. It will be created as an OFFLINE directory, just ABOVE root level, where it is not web-accessible. A file named db_settings.txt will be created in the 'logs' directory, inside a sub-directory with the same name as the web site being monitored, e.g logs/domain.com. This file contains database access details (password is encrypted). FTP access details are stored in the database (password encrypted).</p>
+<p class="sub5">2. Create a directory, just BELOW root level, where you will upload the SimpleSiteAudit files. Name this directory what ever you like, e.g. 'ssa'. This directory should be password protected as it will contain access to sensitive information.</p>
+
+
+<h4>RUN THE SETTINGS PAGE (index1.php)</h4>
+
+<p class="sub5">1. Upload the files to your new directory and run index1.php in your browser.</p> 
+<p class="sub5">2. Complete and submit the FTP and database settings for each site you want to monitor, and then click 'Finished' to move on to the preferences form. Once this is submitted, you are ready to make the first scan.</p>
+
+
+<h4>MONITORING SUB-DOMAINS OR SUB-DIRECTORIES</h4> 
+
+<p class="sub5">To monitor a sub-domain or sub-directory, the field 'Document root of site being monitored', in the FTP/db set up page, should be entered as, e.g. htdocs/sub-dir-name or the sub-domain-name - a sub-directory can be added to the sub-domain-name if required, e.g. sub-domain-name/sub-dir-name.</p>
+ 
+
+<h4>CREATE AN SSA LOG FILE</h4>
+
+<p class="sub5">The settings form allows the optional creation of a log file, containing all the SimpleSiteAudit script outputs. Details will be saved to the database on the 'Master' server. This table can grow quite large, periodic clearing of the table is recommended, and ability to display and clear the table will be provided after the first changes have been detected. </p>
+
+
+<h4>SETTING UP YOUR CRON JOB</h4> 
+
+<p class="sub5">During the SSA set up process a special file, named '_remotewebsitename.tld.php' will be created in the SSA directory for each site being monitored. Your Cron jobs should be aimed at these files, e.g./htdocs/ssa/_remotewebsitename.tld.php  - This mechanism saves the need to pass parameters from your Cron job to the script, which is restricted by some ISPs. if you are monitoring more than 1 web site, make sure your Cron jobs are adequately spaced out.</p>
+
+
+<h4>DISPLAYING YOUR CRON LOG FILE (Field: 'Path to, and name of your Cron log')</h4>
+
+<p class="sub5">This must point to your Cron log file, i.e. the relative path from your SSA installation files. e.g. ../../cronfilename.txt The 'view file' button will not appear if this file does not exist. Recommend leaving this field empty if using the SSA log file and vice versa. The log contents will appear in a read only textarea. Further formatting is not possible due to unknown input by the Cron process itself. There is no 'Clear log' button for this feature.</p>
+ 
+
+<h4>SECONDARY USES</h4>
+
+<p class="sub5">There may be other uses for this software, for example, it could be used to notify someone, or a group of people, that certain files had been uploaded and are now available for download or viewing. I’d be interested to know what other uses it has been put to. Please use the 'Feedback' link.</p>
+</div>
+
+</body>
+
+</html>
