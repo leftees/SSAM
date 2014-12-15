@@ -48,7 +48,7 @@ if(file_exists($db_file)){
   exit(0);
 }
 
-
+//encrypt / decrypt all these values?
 $db_server = trim($db_settings[0]); // database Server 
 $db_user = trim($db_settings[1]);  // mysql user name
 $dbpass = trim($db_settings[2]);  // mysql password
@@ -644,6 +644,7 @@ $total_time = round(($finish - $start), 4);
 return $total_time;
 }
 
+// remove this and use the database for calculating the statistics
 function store_status($logs_dir, $ftp_server, $missing, $added, $perm, $modified, $renamed, $total_time) {
 
     $date = date ("dMy H:i:s");
@@ -667,7 +668,7 @@ function store_status($logs_dir, $ftp_server, $missing, $added, $perm, $modified
         $time_arr = file($status_file1);
         $existing_times = $time_arr[8];
         $average_time = $existing_times.','.$total_time;
-         $existing_status = file($status_file1);
+         $existing_status = file($status_file1); //same as line 667
          $first_run_date = trim($existing_status[1]);
          $last_run_time = trim($existing_status[2]);
 

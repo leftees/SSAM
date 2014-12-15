@@ -4,7 +4,7 @@ SSAM
 security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.terryheffernan.net - early WIP
 
 
-##Todo
+##Todo (no structural changes needed)
 - [ ] migrate from MySQL to PDO (removes the deprecated notices)
 - [ ] use a config.sample.php file for individual settings at setup
 - [ ] generate a unique key for the encryption/decryption
@@ -16,7 +16,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] run an OWASP ZAP scan on a preinstalled version
 - [ ] use the PHPMailer library or own class instead of the mail() method for custom mail settings (via SMTP)
 
-##Planned
+##Planned (structural changes needed)
 - [ ] create a dashboard for an overview of all monitored websites
 - [ ] integrate code for scanning files for webshells, malware and other malicious (hidden/obfuscated) code
 - [ ] backup function for settings, websites and so on
@@ -27,3 +27,5 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] support for SSH/SFTP
 - [ ] user management system with login and logout functions, rights and so on
 - [ ] use semantic versioning (SemVer)
+- [ ] generate statistics from database
+- [ ] use MySQL query caching

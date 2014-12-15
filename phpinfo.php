@@ -11,4 +11,5 @@ echo '<html><head>
  <script type="text/javascript" language="JavaScript" src="find2.js"></script>
 </body></html>';
 echo phpinfo();
+//find2.js not needed?
 ?>

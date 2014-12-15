@@ -293,6 +293,7 @@ echo '<a><input onclick="window.location.href=\'#top\'" style="background-color:
 <script type="text/javascript" language="JavaScript" src="find1.js"></script>
 </a></div><![endif]>';
 };  // SimpleSiteAudit</font> Admin<label> Multisite <img  align="top" title="Site logo" alt="Site logo" border="0" src="images/ssa-logo.png" width="412" height="88">
+// remove buttons and search?
 echo '
   <a name="top"></a>
   <table class="tab1"><tr><td>
@@ -340,7 +341,7 @@ echo '" />
   <br /><img alt="Click for info" title="Click for info" border="0" src="images/info.png" width="16" height="16">  
   <span><b>\'List of files and/or file extensions to ignore\'</b><br /><br />This should consist of a list of comma or linefeed separated file names, including the file extension.<br />
   Be careful with the selection of file names. If, for example, index.php is entered, all files with that name, throughout the site, will be ignored. (This field is optional).<br><br>
-  If you want to exculde catagories of files, you can mix in some file extensions (including the dot), e.g. your list might look something like this:
+  If you want to exclude categories of files, you can mix in some file extensions (including the dot), e.g. your list might look something like this:
   robots.txt,.gif,.jpg,filename.doc,.pdf<p>If you wish to ignore certain file types in a specific folder only, you can add the path to the folder and the extension to ignore. 
   The path must include the site\'s root directory name, e.g. htdocs - your entry to this field might look like this:<br>htdocs/folder1/folder2/folder3/.jpg<br> 
   only file type .jpg will be ignored and only in folder3. All other .jpg files will be monitored. </p><p>It is possible to mix in all of the above options.</p></span></a>
