@@ -4,9 +4,9 @@ $ftp_user = '';
 $ftp_pw = '';
 $directory = '';
 
-    $conn_id = ftp_connect($ftp_server) OR die("Unable to establish an FTP connection");
-    @ftp_login($conn_id, $ftp_user, $ftp_pw) OR die("ftp-login failed - User name or password not correct");
-    @ftp_pasv ( $conn_id, true ) or die("Unable to set FTP passive mode."); //Use passive mode for client-side action
+    $conn_id = ftp_connect($ftp_server) OR exit("Unable to establish an FTP connection");
+    @ftp_login($conn_id, $ftp_user, $ftp_pw) OR exit("ftp-login failed - User name or password not correct");
+    @ftp_pasv ( $conn_id, true ) or exit("Unable to set FTP passive mode."); //Use passive mode for client-side action
     //ftp_delete($conn_id,"ssa/filediff/temp/2.htm");
     //ftp_delete($conn_id,'ssa/filediff/temp/1.htm');
     $file_list = array_filter(ftp_rawlist($conn_id, $directory, true));

@@ -58,11 +58,11 @@ $db_name = trim($db_settings[3]);   // Name of database
     $db_pass = trim($decrypt);
 
 if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_empty() > 0*/){
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
-    $result = mysql_query("SELECT FTP_user,FTP_pass,root_dir FROM $settings_table") or die(mysql_error());
+    $result = mysql_query("SELECT FTP_user,FTP_pass,root_dir FROM $settings_table") or exit(mysql_error());
 
     while($row = mysql_fetch_array($result)) 
     {
@@ -70,7 +70,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_e
        $ftp_pw = $row['FTP_pass'];
        $root_dir = $row['root_dir'];
     }
-    mysql_close($con)or die(mysql_error());
+    mysql_close($con)or exit(mysql_error());
 }
 
 if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
@@ -101,11 +101,11 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
     global $start;
     $remote_sys = explode(',',$remote_sys_type);
 
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_site';
-    $result = mysql_query("SELECT * FROM $site_table") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM $site_table") or exit(mysql_error());
 
     while($row = mysql_fetch_array($result)) 
     {
@@ -122,7 +122,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
        $rename_file = explode(',',$rename);
     }
 
-    mysql_close($con)or die(mysql_error());
+    mysql_close($con)or exit(mysql_error());
     
     $skip_dir = array_filter(array_map('trim', $skip_dir));
     $excludes = array_filter(array_map('trim', $excludes));
@@ -162,7 +162,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
         exit("ftp-login failed - User name or password not correct");
     }
         
-    @ftp_pasv ( $conn_id, true ) or die("Unable to set FTP passive mode."); //Use passive mode for client-side action
+    @ftp_pasv ( $conn_id, true ) or exit("Unable to set FTP passive mode."); //Use passive mode for client-side action
     
     $system = ftp_raw($conn_id,'syst');
     
@@ -179,8 +179,8 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
     
     $newlist_prefix = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_newlist';
     $log_prefix = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log';
-    $conn = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $conn)or die(mysql_error());
+    $conn = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $conn)or exit(mysql_error());
 
     $oldlist = oldlist($newlist_prefix);
 
@@ -190,7 +190,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
         $first_run = 'Y';
     }
    
-    mysql_query("TRUNCATE TABLE  `$newlist_prefix`") or die('Unable to empty the newlist table:<br> '.mysql_error()); 
+    mysql_query("TRUNCATE TABLE  `$newlist_prefix`") or exit('Unable to empty the newlist table:<br> '.mysql_error()); 
 
         echo 'SSA v'.$ssa_ver.' Multisite - Script run on '.$ftp_server.' on '.$date."\r\n";
 
@@ -235,7 +235,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                   '$size',
                   '$day$month$y',
                   '$time',
-                  '$perms')")or die(mysql_error()); 
+                  '$perms')")or exit(mysql_error()); 
           }
         }// End foreach
 
@@ -270,7 +270,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                             '',
                             '$value[size]',
                             '',
-                            '$date')")or die(mysql_error());
+                            '$date')")or exit(mysql_error());
                 $i++;
                 $missing++;
               }
@@ -317,7 +317,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                        
          if($file_name != ""){
                 
-            $resultB = mysql_query("SELECT * FROM $newlist_prefix WHERE path = '$path' AND filename = '$file_name' ")or die(mysql_error());
+            $resultB = mysql_query("SELECT * FROM $newlist_prefix WHERE path = '$path' AND filename = '$file_name' ")or exit(mysql_error());
 
             $row2 = mysql_fetch_row($resultB);
        
@@ -331,8 +331,8 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
             if(in_array($file_name,$rename_file)){
 
                 if(!@ftp_rename ( $conn_id , $path.'/'.$file_name , $path.'/'.$file_name.'_renamed.by.ssam' )){
-                    @ftp_chmod ($conn_id, 755, $file_name) or die(' Unable to change file permissions: '.$file_name);
-                    @ftp_rename ( $conn_id , $path.'/'.$file_name , $path.'/'.$file_name.'_renamed.by.ssam' ) or die(' Unable to rename file: '.$path.'/'.$file_name);
+                    @ftp_chmod ($conn_id, 755, $file_name) or exit(' Unable to change file permissions: '.$file_name);
+                    @ftp_rename ( $conn_id , $path.'/'.$file_name , $path.'/'.$file_name.'_renamed.by.ssam' ) or exit(' Unable to rename file: '.$path.'/'.$file_name);
                 }
 
                 //ftp_close($conn_id);
@@ -357,7 +357,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                                 '$new_perms',
                                 '$size_oldlist',
                                 '$size_newlist',
-                                '$date')")or die(mysql_error());
+                                '$date')")or exit(mysql_error());
  
                $i++;
                $renamed++;               
@@ -384,7 +384,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                                 '$new_perms',
                                 '$size_oldlist',
                                 '$size_newlist',
-                                '$date')")or die(mysql_error()); 
+                                '$date')")or exit(mysql_error()); 
                     $i++;
                     $modified++;
                 }
@@ -413,7 +413,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                                 '$new_perms',
                                 '$size_oldlist',
                                 '$size_newlist',
-                                '$date')")or die(mysql_error()); 
+                                '$date')")or exit(mysql_error()); 
                     $i++;
                     $added++;
                 }
@@ -440,7 +440,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                                 '$new_perms',
                                 '$size_oldlist',
                                 '$size_newlist',
-                                '$date')")or die(mysql_error()); 
+                                '$date')")or exit(mysql_error()); 
                     $i++;
                     $perm++;
                 }
@@ -470,12 +470,12 @@ echo '. Page loaded in ' . $total_time . ' seconds.'."\r\n";
 //##################################################################################
 
         // Close mysql connection
-        mysql_close($conn)or die(mysql_error());
+        mysql_close($conn)or exit(mysql_error());
 }
 
 function oldlist($newlist_prefix){
     $oldlist = array();
-    $old_list = mysql_query("SELECT * FROM $newlist_prefix") or die(mysql_error());
+    $old_list = mysql_query("SELECT * FROM $newlist_prefix") or exit(mysql_error());
     $a = 0;
     while($row = mysql_fetch_array($old_list)){
         $key = $row['path'].'/'.$row['filename'];
@@ -492,7 +492,7 @@ function oldlist($newlist_prefix){
 
 function newlist($newlist_prefix){
     $newlist = array();
-    $new_list = mysql_query("SELECT * FROM $newlist_prefix") or die(mysql_error());
+    $new_list = mysql_query("SELECT * FROM $newlist_prefix") or exit(mysql_error());
     $a = 0;
     while($row = mysql_fetch_array($new_list)){
         $key = $row['path'].'/'.$row['filename'];
@@ -536,11 +536,11 @@ function convert_perms($perms){
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die('no connection to database: '.mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit('no connection to database: '.mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or die(mysql_error()); 
+    $result = mysql_query($x) or exit(mysql_error()); 
     $total_rows = mysql_fetch_row($result);
     return $total_rows[0];    
 }
@@ -619,16 +619,16 @@ function raw_list_windows($folder,$conn_id,$db_server,$db_user,$db_name,$db_pass
     $file_count  = count($list); 
     $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_site';
 
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
-    $result = mysql_query("SELECT * FROM $site_table") or die('MySQL query failed<br>'.mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
+    $result = mysql_query("SELECT * FROM $site_table") or exit('MySQL query failed<br>'.mysql_error());
 
     while($row = mysql_fetch_array($result)){
        $skip_dir = $row[skip_dir];
        $skip_file = $row[skip_files];
     }
     
-    mysql_close($con)or die(mysql_error());      
+    mysql_close($con)or exit(mysql_error());      
 
         $skipdir = explode(',',$skip_dir);
         $skipfile = explode(',',$skip_file);

@@ -73,16 +73,16 @@ $is_table_empty = is_table_empty($site_table,$db_server,$db_user,$db_pass,$db_na
 }
 
 if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
-    $con = @mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error())or die('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
+    $con = @mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error())or exit('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
         db server name<br>
         db user name<br>
         db password<br>
         <a href="index1.php?check_db_details=Y">Click to reload form</a>');
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_site';
     $log_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_log';
-    $result = mysql_query("SELECT * FROM $site_table") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM $site_table") or exit(mysql_error());
     $r = mysql_query("SELECT COUNT(*) FROM $log_table ");
     
     while($rows = mysql_fetch_array($r)) 
@@ -105,7 +105,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_emp
        //$dte = $row['date'];
        //$tme = $row['time'];
     }
-    mysql_close($con)or die(mysql_error()); 
+    mysql_close($con)or exit(mysql_error()); 
 }
 
 if($_POST['submit']){
@@ -568,13 +568,13 @@ echo '<table class="tab2" border="1" bordercolor="#ccc">
       <tr><td colspan="9">'.$contents_header.'</td></tr>';
 
 if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log';
     $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
-    $result = mysql_query("SELECT * FROM $log_table") or die(mysql_error());
-    $dir_to_monitor = mysql_query("SELECT * FROM $settings_table") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM $log_table") or exit(mysql_error());
+    $dir_to_monitor = mysql_query("SELECT * FROM $settings_table") or exit(mysql_error());
 
     while($row = mysql_fetch_array($result)) 
     {
@@ -583,7 +583,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_emp
     
     $dir_to_mon = mysql_fetch_array($dir_to_monitor);
 
-    mysql_close($con)or die(mysql_error()); 
+    mysql_close($con)or exit(mysql_error()); 
 }
 
 echo '<tr><td colspan="8" style="padding: 3px;font-size:12px;"><b>Web site:</b> '.$ftp_server.'<br /><b>Start Dir:</b> '.$dir_to_mon[root_dir].'</td>

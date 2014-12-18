@@ -24,14 +24,14 @@ if(file_exists($dbsettings)){
     $db_pass = trim($decrypt);
 	
 	$con = new PDO('mysql:host='.$db_server.';dbname='.$db_name, $db_user, $db_pass); //the database type can be later configured (mysql, oracle, mssql, sqlite, ...)
-	//$con = mysql_connect($db_server,$db_user,$db_pass)or die('no conn: '.mysql_error());
-    //mysql_select_db($db_name, $con)or die(mysql_error()); //add try - catch block for printing the exception - only in debug mode?
+	//$con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
+    //mysql_select_db($db_name, $con)or exit(mysql_error()); //add try - catch block for printing the exception - only in debug mode?
 
     $dom = strstr ($ftp_server,'.');
     $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log';
 
     $query = "TRUNCATE TABLE $log_table";
-    mysql_query($query)or die('MySql query failed! Please check your database settings and user permissions.<br>'.mysql_error());
+    mysql_query($query)or exit('MySql query failed! Please check your database settings and user permissions.<br>'.mysql_error());
 
     $con = null;
 }
@@ -46,11 +46,11 @@ if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) == 0) {
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     
 	$con = new PDO('mysql:host='.$db_server.';dbname='.$db_name, $db_user, $db_pass);
-    //$con = mysql_connect($db_server,$db_user,$db_pass)or die('no conn: '.mysql_error());
-    //mysql_select_db($db_name, $con)or die(mysql_error());
+    //$con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
+    //mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or die(mysql_error()); 
+    $result = mysql_query($x) or exit(mysql_error()); 
     $total_rows = mysql_fetch_row($result);
     return $total_rows[0];    
 }

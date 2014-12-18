@@ -26,8 +26,8 @@ if(file_exists($dbsettings)){
     $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
     
-$con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-mysql_select_db($db_name, $con)or die(mysql_error());
+$con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+mysql_select_db($db_name, $con)or exit(mysql_error());
 
     
 $dom = strstr ($ftp_server,'.');
@@ -43,12 +43,12 @@ if(strstr($ftp_server,'-')){
   $newlist_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_newlist'));
 }
 
-@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$log_table`")or die('Unable to clear the table - ERROR1! '.mysql_error());
-@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$site_table`")or die('Unable to clear the table - ERROR2! '.mysql_error());
-@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$settings_table`")or die('Unable to clear the table - ERROR3! '.mysql_error());
-@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$newlist_table`")or die('Unable to clear the table - ERROR4! '.mysql_error());
+@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$log_table`")or exit('Unable to clear the table - ERROR1! '.mysql_error());
+@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$site_table`")or exit('Unable to clear the table - ERROR2! '.mysql_error());
+@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$settings_table`")or exit('Unable to clear the table - ERROR3! '.mysql_error());
+@mysql_query("DROP TABLE IF EXISTS `$db_name`.`$newlist_table`")or exit('Unable to clear the table - ERROR4! '.mysql_error());
 
-mysql_close($con)or die(mysql_error());
+mysql_close($con)or exit(mysql_error());
 }
 
 if(file_exists($dbsettings)){

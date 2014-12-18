@@ -43,7 +43,7 @@ if($_GET['server']){
      
 if ($_POST['submit']){
   if(!file_exists($logs_dir)){
-    mkdir($logs_dir,0777,TRUE) or die('Unable to create the logs directory. Program halted.<br />Try creating dir: '.$logs_dir.' manually.' );
+    mkdir($logs_dir,0777,TRUE) or exit('Unable to create the logs directory. Program halted.<br />Try creating dir: '.$logs_dir.' manually.' );
   }
   
 $ftp_server = $_POST['ftp_server']; 
@@ -55,7 +55,7 @@ $cron_file = '_'.$ftp_server.'.php';
           $ftp_server = \''.$ftp_server.'\'; 
           include \'ftp_scan.php\'; 
          ?>';   
-        $fp = fopen($cron_file, "w") or die('Unable to create cron file');
+        $fp = fopen($cron_file, "w") or exit('Unable to create cron file');
         fwrite($fp, $string);
         fclose($fp);
     }
@@ -87,12 +87,12 @@ if($_GET['check_db_details'] != 'Y'){
  }
  
  if(file_exists($dbsettings)){
-    $con = @mysql_connect($db_server,$db_user,$db_pass)or die('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
+    $con = @mysql_connect($db_server,$db_user,$db_pass)or exit('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
         db server name<br>
         db user name<br>
         db password<br>
         <a href="index1.php?check_db_details=Y">Click to reload form</a>');
-    mysql_select_db($db_name, $con)or die(mysql_error());    
+    mysql_select_db($db_name, $con)or exit(mysql_error());    
     $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
     $result = @mysql_query("SELECT site_URL,FTP_user,FTP_pass,root_dir FROM $settings_table");
 }
@@ -106,7 +106,7 @@ if(is_resource ($result) && !$_POST['submit']){
        $ftp_pass = $row[FTP_pass];
        $root_dir = $row[root_dir];
     }    
-     mysql_close($con)or die(mysql_error());
+     mysql_close($con)or exit(mysql_error());
    
      if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
          $decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($ftp_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");

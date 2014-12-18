@@ -88,10 +88,10 @@ $date = date ("dMy");
 $time = date("H:i");
 
     $site_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_site';
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die('MySql ERROR1! '.mysql_error());
-    mysql_select_db($db_name, $con)or die('MySql ERROR2! '.mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit('MySql ERROR1! '.mysql_error());
+    mysql_select_db($db_name, $con)or exit('MySql ERROR2! '.mysql_error());
     $query = "TRUNCATE TABLE $site_table";
-    mysql_query($query)or die('Failed to empty site table<br>'.mysql_error());
+    mysql_query($query)or exit('Failed to empty site table<br>'.mysql_error());
     $query ="INSERT INTO $site_table (
         email_subj,
         email_alert,        
@@ -118,21 +118,21 @@ $time = date("H:i");
         '$date',
         '$time')";
 
-    mysql_query($query)or die('Failed to update site table<br>'.mysql_error());
-    mysql_close($con)or die(mysql_error());
+    mysql_query($query)or exit('Failed to update site table<br>'.mysql_error());
+    mysql_close($con)or exit(mysql_error());
 }
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     
-    $con = @mysql_connect($db_server,$db_user,$db_pass)or die('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
+    $con = @mysql_connect($db_server,$db_user,$db_pass)or exit('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
         db server name<br>
         db user name<br>
         db password<br>
         <a href="index1.php?check_db_details=Y">Click to reload form</a>');
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or die(mysql_error()); 
+    $result = mysql_query($x) or exit(mysql_error()); 
     $total_rows = mysql_fetch_row($result);
     return $total_rows[0];    
 }

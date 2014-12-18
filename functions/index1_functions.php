@@ -24,10 +24,10 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
         $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
 
     
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     $query = "TRUNCATE TABLE $settings_table";
-    mysql_query($query)or die('MySql ERROR3! '.mysql_error());
+    mysql_query($query)or exit('MySql ERROR3! '.mysql_error());
 
         $string = ' '.$ftp_pass.' '; // note the spaces    
         $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), $string, MCRYPT_MODE_CBC, md5(md5($encryption_key))));
@@ -50,8 +50,8 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
         '$date',
         '$time')";
 
-    mysql_query($query)or die('Query failed:<br />'.mysql_error());
-    mysql_close($con)or die(mysql_error());
+    mysql_query($query)or exit('Query failed:<br />'.mysql_error());
+    mysql_close($con)or exit(mysql_error());
 }
 
 function is_removeable($dir) {
@@ -91,13 +91,13 @@ global $ftp_server;
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or die('is_table_empty query1: '.mysql_error()); 
+    $result = mysql_query($x) or exit('is_table_empty query1: '.mysql_error()); 
     $total_rows = mysql_fetch_row($result);
-    mysql_close($con)or die(mysql_error()); 
+    mysql_close($con)or exit(mysql_error()); 
     return $total_rows[0];    
 }
 
@@ -109,13 +109,13 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     $log_table      = 'ssa_'.$ftp_svr.'_log';
     $site_table     = 'ssa_'.$ftp_svr.'_site';
 
-    $con = @mysql_connect($db_server,$db_user,$db_pass)or die('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
+    $con = @mysql_connect($db_server,$db_user,$db_pass)or exit('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
         db server name<br>
         db user name<br>
         db password<br>
         <a href="index1.php">Click to reload form</a>');
-    mysql_query("CREATE DATABASE IF NOT EXISTS $db_name",$con)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    mysql_query("CREATE DATABASE IF NOT EXISTS $db_name",$con)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
 
     // Create table
 	// the path and filename fields should be much longer
@@ -131,7 +131,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     PRIMARY KEY (id)
     )";
     // Execute query
-    mysql_query($newlist_sql,$con)or die('create_db query2: '.mysql_error());
+    mysql_query($newlist_sql,$con)or exit('create_db query2: '.mysql_error());
 
     $settings_sql = "CREATE TABLE IF NOT EXISTS $settings_table
     (
@@ -146,7 +146,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     PRIMARY KEY (id)
     )";
     // Execute query
-    mysql_query($settings_sql,$con)or die('Failed to create settings table<br>'.mysql_error());
+    mysql_query($settings_sql,$con)or exit('Failed to create settings table<br>'.mysql_error());
 	// some fields should be longer
     $site_sql = "CREATE TABLE IF NOT EXISTS $site_table
     (
@@ -165,7 +165,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     PRIMARY KEY (id)
     )";
     // Execute query
-    mysql_query($site_sql,$con)or die('Failed to create site table<br>'.mysql_error());
+    mysql_query($site_sql,$con)or exit('Failed to create site table<br>'.mysql_error());
 	//the file field should be mouch longer
     $log_sql = "CREATE TABLE IF NOT EXISTS $log_table
     (
@@ -182,8 +182,8 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     PRIMARY KEY (id)
     )";
     // Execute query
-    mysql_query($log_sql,$con)or die('Failed to create log table<br>'.mysql_error());
+    mysql_query($log_sql,$con)or exit('Failed to create log table<br>'.mysql_error());
 
-    mysql_close($con)or die(mysql_error());
+    mysql_close($con)or exit(mysql_error());
 }
 ?>

@@ -25,11 +25,11 @@ $db_name = trim($db_settings[3]);   // Name of database
     $db_pass = trim($decrypt);
 
 if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_empty() > 0*/){
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_settings';
-    $result = mysql_query("SELECT FTP_user,FTP_pass,root_dir FROM $settings_table") or die(mysql_error());
+    $result = mysql_query("SELECT FTP_user,FTP_pass,root_dir FROM $settings_table") or exit(mysql_error());
 
     while($row = mysql_fetch_array($result)) 
     {
@@ -38,7 +38,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_e
        $root_dir = $row['root_dir'];
 	   
     }
-    mysql_close($con)or die(mysql_error());
+    mysql_close($con)or exit(mysql_error());
 }
 
 if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
@@ -51,11 +51,11 @@ if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die('no conn: '.mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or die(mysql_error()); 
+    $result = mysql_query($x) or exit(mysql_error()); 
     $total_rows = mysql_fetch_row($result);
     return $total_rows[0];    
 }

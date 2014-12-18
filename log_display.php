@@ -13,13 +13,13 @@ echo '<table class="tab2" border="1" bordercolor="#ccc">
       <tr><td colspan="9">'.$contents_header.'</td></tr>';
 
 if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
-    $con = mysql_connect($db_server,$db_user,$db_pass)or die(mysql_error());
-    mysql_select_db($db_name, $con)or die(mysql_error());
+    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
+    mysql_select_db($db_name, $con)or exit(mysql_error());
     
     $log_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server)).'_log';
     $settings_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server)).'_settings';
-    $result = mysql_query("SELECT * FROM $log_table") or die(mysql_error());
-    $dir_to_monitor = mysql_query("SELECT * FROM $settings_table") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM $log_table") or exit(mysql_error());
+    $dir_to_monitor = mysql_query("SELECT * FROM $settings_table") or exit(mysql_error());
 
     while($row = mysql_fetch_array($result)) 
     {
@@ -28,7 +28,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_emp
     
     $dir_to_mon = mysql_fetch_array($dir_to_monitor);
 
-    mysql_close($con)or die(mysql_error()); 
+    mysql_close($con)or exit(mysql_error()); 
 }
 
 echo '<tr><td colspan="8" style="padding: 3px;font-size:12px;"><b>Web site:</b> '.$ftp_server.'<br /><b>Start Dir:</b> '.$dir_to_mon[root_dir].'</td>
