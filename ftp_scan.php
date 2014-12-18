@@ -130,9 +130,40 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
     $email_text = $email_header.' - '.$ftp_server."\r\n\n";
 
     // make FTP connection
-    $conn_id = ftp_connect($ftp_server) OR die("Unable to establish an FTP connection");
-    @ftp_login($conn_id, $ftp_user, $ftp_pw) OR die("ftp-login failed - User name or password not correct");
+    $conn_id = ftp_connect($ftp_server);
+    
+    if(!$conn_id){
+        exit("Unable to establish an FTP connection");
+    }
+    if(@ftp_login($conn_id, $ftp_user, $ftp_pw)){
+    }
+    else {
+        //send mail if login fails
+        /*
+        //set priority to high, there are 1 = High, 3 = Normal and 5 = Low
+        //use this for different priorities for the mails
+        $headers = "MIME-Version: 1.0\r\n" ;
+        $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\r\n"; //html
+        $headers .= "Content-Type: text/plain; charset=\"utf-8\"\r\n"; //or plaintext
+        $header  .= "Content-Type: text/plain; charset=utf-8\r\n"; // \r\n or \n?
+        $headers .= "X-Priority: 1 (Highest)\r\n";
+        $headers .= "X-MSMail-Priority: High\r\n";
+        $headers .= "Importance: High\r\n";
+        
+        $headers  = "From: Some Person <person@website.com>\r\n";
+        $headers .= "Reply-To: person@website.com\r\n";
+        $headers .= "Return-Path: person@website.com\r\n";
+
+        $headers = 'From: '.$email_from_addr . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+        
+        $status   = mail($to, $subject, $message,$headers);
+        mail($email_alert_addr, $email_subject, "ftp-login failed - User name or password not correct", $headers); //Simple mail function for alert.
+        */
+        exit("ftp-login failed - User name or password not correct");
+    }
+        
     @ftp_pasv ( $conn_id, true ) or die("Unable to set FTP passive mode."); //Use passive mode for client-side action
+    
     $system = ftp_raw($conn_id,'syst');
     
     $OS = $system[0];
@@ -246,9 +277,19 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
             }
         }
         
-        $conn_id = @ftp_connect($ftp_server) OR die("Unable to establish an FTP connection");
-        @ftp_login($conn_id, $ftp_user, $ftp_pw) OR die("ftp-login failed - User name or password not correct");
-        @ftp_pasv ( $conn_id, true ) or die("Unable to set FTP passive mode."); //Use passive mode for client-side action
+        $conn_id = @ftp_connect($ftp_server);
+		if(!$conn_id){
+			exit("Unable to establish an FTP connection");
+		}
+        if(@ftp_login($conn_id, $ftp_user, $ftp_pw)){
+		}
+		else {
+			//send mail if login fails
+			$headers = 'From: '.$email_from_addr . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+            mail($email_alert_addr, $email_subject, "ftp-login failed - User name or password not correct", $headers); //Simple mail function for alert.
+			exit("ftp-login failed - User name or password not correct");
+		}
+        @ftp_pasv ( $conn_id, true ) or exit("Unable to set FTP passive mode."); //Use passive mode for client-side action
        
         $added = 0;
         $modified = 0;
