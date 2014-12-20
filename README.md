@@ -33,3 +33,5 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] monitor databases for changes
 - [ ] translate strings and use constants
 - [ ] send more mails, when something fails (if enabled)
+- [ ] improve database (use InnoDB as engine, set default charset to UTF-8)
+- [ ] use prepared statements
