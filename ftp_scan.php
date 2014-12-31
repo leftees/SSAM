@@ -578,7 +578,7 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                      $ign_directory = explode('/',$item['path']);
 
                      if(!in_array($item['path'],$skipdir) && is_ignored($skipdir,$item['path']) == 0 && !array_intersect($ign_directory,$skipdir) &&
-                        !in_array($parts[8],$excludes) && !in_array($extn,$excludes) && !in_array($dir_filetype,$excludes)){
+						!in_array($parts[8],$excludes) && !in_array($extn,$excludes) && !in_array($dir_filetype,$excludes) && !(in_array($parts[8],$skipdir) && $parts[0]{0}=='d')){
 
                           if(!strpos($value,'/') && $parts[8] != '.' && $parts[8] != '..'){
                             list($item['perms'],
@@ -648,11 +648,13 @@ function raw_list_windows($folder,$conn_id,$db_server,$db_user,$db_name,$db_pass
       $dir_filetype = $folder.'/'.$extn;
 
      if (substr($list[$i],0,1) == "d" && is_ignored($skipdir,$folder) == 0 && !array_intersect($path_array,$skipdir) && !in_array($folder,$skipdir) 
-              && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".."){
+              && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".."
+			  && !(in_array($ItemName,$skipdir) && substr($list[$i],0,1) == "d")){
          array_push($files, $split);
          raw_list_windows($path,$conn_id,$db_server,$db_user,$db_name,$db_pass,$ftp_server); 
      }elseif (!array_intersect($path_array,$skipdir) && !in_array($folder,$skipdir) && is_ignored($skipdir,$folder) == 0 
-             && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".."){ 
+             && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".." 
+			 && !(in_array($ItemName,$skipdir) && substr($list[$i],0,1) == "d")){ 
          array_push($files, $split);
      }
       $i++; 
