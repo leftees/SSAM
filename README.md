@@ -35,3 +35,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] send more mails, when something fails (if enabled)
 - [ ] improve database (use InnoDB as engine, set default charset to UTF-8)
 - [ ] use prepared statements
+- [ ] scan for CVE
+- [ ] scan WP plugins for vunlerabilities and exploits
+- [ ] add news section (per website) with RSS feeds (manage, show, import, export)
+- [ ] export data/views to CSV, TSV, JSON, XML and PDF
