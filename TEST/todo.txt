@@ -1,0 +1,12 @@
+grep files ssh
+ssh database mysqldump backup
+ssh files targz backup
+ssh email backup?
+
+
+ssh = sftp (phpseclib)
+
+ftps? (ftp + ssl?) ftp_ssl_connect
+
+
+monitor email, spam & malware (attachments)?

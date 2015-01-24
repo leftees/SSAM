@@ -217,10 +217,10 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
 
                 if(strpos($year, ':')){
                     $time = $year;
-                    $y = ""; //then it is the current year, anyway, we should use a timestamp
+                    $y = "";
                 }else{
                     $y = $year;
-                    $time = "00:00"; // should read 00:00:00
+                    $time = "00:00";
                 }
 
           mysql_query("INSERT INTO $newlist_prefix
@@ -583,34 +583,16 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
 
                           if(!strpos($value,'/') && $parts[8] != '.' && $parts[8] != '..'){
                             list($item['perms'],
-                                $item['number'],
-                                $item['user'],
-                                //$item['user'], should be $item['owner'],
-                                $item['group'],                      
-                                $item['size'],
-                                $item['month'],
-                                $item['day'],
-                                $item['year'], 
-                                /*
-                                    this might be a string for the time if the file was created in the last 12 months, 
-                                    if it is older than 12 months, the year is used instead of the time string 
-                                    see http://php.net/manual/en/function.ftp-rawlist.php
-                                    
-                                    use $item['year_time'] instead of $item['year']
-                                */
-                                $item['filename']) = $parts;
-                                /*
-                                    we just need the timestamp in the database instead of date and time
-									
-									calculate timestamp and calculate the numeric values of day, month and year
-									$item['timestamp'] = strtotime(implode(' ', array($item['month'], $item['day'], $item['year_time'])));
-                                    $item['year'] = date("Y",$item['timestamp']);
-                                    $item['month'] = date("m",$item['timestamp']);
-                                    $item['day'] = date("d",$item['timestamp']);
-									
-                                    see http://stackoverflow.com/a/10207358/753676 for more infos
-                                */
-                                $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file?
+                                 $item['number'],
+                                 $item['user'],
+                                 $item['group'],                      
+                                 $item['size'],
+                                 $item['month'],
+                                 $item['day'],
+                                 $item['year'],
+                                 $item['filename']) = $parts;
+                                 // we could need some timestamp and the year in the database => new db scheme
+                                 $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file? this is not used actually
 
                                 if($file != $item['filename']){
                                     $items[] = $item;
@@ -706,7 +688,7 @@ $total_time = round(($finish - $start), 4);
 return $total_time;
 }
 
-// improve or remove this and use the database for calculating the statistics and the new timestamp
+// remove this and use the database for calculating the statistics
 function store_status($logs_dir, $ftp_server, $missing, $added, $perm, $modified, $renamed, $total_time) {
 
     $date = date ("dMy H:i:s");

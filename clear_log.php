@@ -22,36 +22,50 @@ if(file_exists($dbsettings)){
 
     $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
-	
-	$con = new PDO('mysql:host='.$db_server.';dbname='.$db_name, $db_user, $db_pass); //the database type can be later configured (mysql, oracle, mssql, sqlite, ...)
-	//$con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
-    //mysql_select_db($db_name, $con)or exit(mysql_error()); //add try - catch block for printing the exception - only in debug mode?
 
-    $dom = strstr ($ftp_server,'.');
-    $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log';
+    /* try { */
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")); //the database type can be later configured (mysql, oracle, mssql, sqlite, ...)
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $query = "TRUNCATE TABLE $log_table";
-    mysql_query($query)or exit('MySql query failed! Please check your database settings and user permissions.<br>'.mysql_error());
+    $dom = strstr ($ftp_server,'.'); //this is not used
+    $log_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log');
+
+    $sth = $con->prepare("TRUNCATE TABLE $log_table");
+    if (!$sth->execute()) {
+    /*  $sth->execute() */
+        echo('Query failed! Please check your database settings and user permissions.<br>');
+        print_r($sth->errorInfo());
+        exit();
+    }
+    
+    /*
+ 
+     $con = null;
+     }
+
+     catch( PDOException $ex ) { 
+     exit('Query failed! Please check your database settings and user permissions.<br>'.$ex->getMessage());
+     }
+
+    */
 
     $con = null;
 }
 
 if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) == 0) {
-  header("Location: index.php?server=$ftp_server&fileEmptied=1");
+    header("Location: index.php?server=$ftp_server&fileEmptied=1");
 }else{
-  echo 'Unable to clear log. Please check your database settings and user permissions.';  
+    echo 'Unable to clear log. Please check your database settings and user permissions.';  
 }
 
-
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
-    
-	$con = new PDO('mysql:host='.$db_server.';dbname='.$db_name, $db_user, $db_pass);
-    //$con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
-    //mysql_select_db($db_name, $con)or exit(mysql_error());
-    
-    $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or exit(mysql_error()); 
-    $total_rows = mysql_fetch_row($result);
-    return $total_rows[0];    
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    $sth = $con->prepare("SELECT COUNT(id) FROM $table_name");
+    // id (pk) is in PostgreSQL much faster as it uses index only scans, see https://wiki.postgresql.org/wiki/Index-only_scans for more info
+    // always use prepared statements and execute for better security, see http://stackoverflow.com/a/4700740/753676 for more info
+    $sth->execute();
+    $total_rows=$sth->fetchColumn(0);
+    $con = null;
+    return $total_rows;    
 }
 ?>
