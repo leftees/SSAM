@@ -1,6 +1,12 @@
 SSAM
 ====
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DanielRuf/SSAM/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DanielRuf/SSAM/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/DanielRuf/SSAM/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/DanielRuf/SSAM/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/DanielRuf/SSAM/badges/build.png?b=master)](https://scrutinizer-ci.com/g/DanielRuf/SSAM/build-status/master)
+
+[![Build Status](https://travis-ci.org/DanielRuf/SSAM.svg?branch=master)](https://travis-ci.org/DanielRuf/SSAM)
+
 security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.terryheffernan.net - early WIP
 
 
