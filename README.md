@@ -29,7 +29,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] backup function for settings, websites and so on
 - [ ] remote deploy of solutions/firewalls like [NinjaFirewall](ninjafirewall.com)
 - [ ] remote emergency functions (maintenance mode, admin user)
-- [ ] use the MVC pattern
+- [ ] use the MVC pattern and PSR
 - [ ] update utility (check, update, upgrade, ...)
 - [ ] support for SSH/SFTP
 - [ ] user management system with login and logout functions, rights and so on
