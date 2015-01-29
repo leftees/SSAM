@@ -31,7 +31,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] remote emergency functions (maintenance mode, admin user)
 - [ ] use the MVC pattern and PSR
 - [ ] update utility (check, update, upgrade, ...)
-- [ ] support for SSH/SFTP
+- [ ] support for SSH/SFTP and FTPS
 - [ ] user management system with login and logout functions, rights and so on
 - [ ] use semantic versioning (SemVer)
 - [ ] generate statistics from database
@@ -45,3 +45,5 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] scan WP plugins for vunlerabilities and exploits
 - [ ] add news section (per website) with RSS feeds (manage, show, import, export)
 - [ ] export data/views to CSV, TSV, JSON, XML and PDF
+- [ ] add uptime monitor
+- [ ] monitor mailboxes for spam and malware/viruses
