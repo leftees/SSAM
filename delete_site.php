@@ -35,10 +35,9 @@ $settings_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ft
 $newlist_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_newlist')));
 
 if(strstr($ftp_server,'-')){
-    $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_log'));
     $log_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_log')));
-    $site_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_site')));
-    $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_settings')));
+    $site_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_site')));
+    $settings_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_settings')));
     $newlist_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_newlist')));
 }
 
