@@ -30,7 +30,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] remote deploy of solutions/firewalls like [NinjaFirewall](ninjafirewall.com)
 - [ ] remote emergency functions (maintenance mode, admin user)
 - [ ] use the MVC pattern and PSR
-- [ ] update utility (check, update, upgrade, ...)
+- [ ] update utility (check, update, upgrade, ...) using zip
 - [ ] support for SSH/SFTP and FTPS
 - [ ] user management system with login and logout functions, rights and so on
 - [ ] use semantic versioning (SemVer)
@@ -47,3 +47,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] export data/views to CSV, TSV, JSON, XML and PDF
 - [ ] add uptime monitor
 - [ ] monitor mailboxes for spam and malware/viruses
+- [ ] add unphp scanner using their API http://www.unphp.net/api/
+- [ ] scan logs
+- [ ] htaccess additions protection
+- [ ] use gettext in PHP if possible for translation
