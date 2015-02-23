@@ -21,7 +21,8 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [x] check minimum required PHP version with https://github.com/llaville/php-compat-info `php phpcompatinfo-3.7.0.phar analyser:run --alias current`
 - [ ] run an OWASP ZAP scan on a preinstalled version
 - [ ] use the PHPMailer library or own class instead of the mail() method for custom mail settings (via SMTP)
-- [x] we do not die(), we just exit()
+- [x] we do not die(), we just exit
+- [x] drop Windows support
 
 ##Planned (structural changes needed)
 - [ ] create a dashboard for an overview of all monitored websites
@@ -46,8 +47,8 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] add news section (per website) with RSS feeds (manage, show, import, export)
 - [ ] export data/views to CSV, TSV, JSON, XML and PDF
 - [ ] add uptime monitor
-- [ ] monitor mailboxes for spam and malware/viruses
+- [ ] monitor mailboxes for spam and malware/viruses (honeypot?)
 - [ ] add unphp scanner using their API http://www.unphp.net/api/
 - [ ] scan logs
 - [ ] htaccess additions protection
-- [ ] use gettext in PHP if possible for translation
+- [ ] use gettext in PHP (if possible) for translation

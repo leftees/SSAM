@@ -35,7 +35,7 @@ if(file_exists($dbsettings)){
     /*  $sth->execute() */
         echo('Query failed! Please check your database settings and user permissions.<br>');
         print_r($sth->errorInfo());
-        exit();
+        exit;
     }
     
     /*

@@ -47,7 +47,7 @@ function traverseDirectoryStructure($dir, $excludeFileList, $excludeExtensionLis
     
 	if (!is_dir($dir) || !is_readable($dir)) {
 		print "The directory you have chosen to monitor - $dir - does not exist or is not readable.<br />Please close this window and re-enter this field.";
-                exit(0);
+                exit;
 	}
         $fldr_count = 0;
         $file_count = 0;

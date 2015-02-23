@@ -130,7 +130,7 @@ if (file_exists($logs_dir)) {
         <p class="sub1" style="text-align: left">Your \'logs\' directory doesn\'t exist or is not writeable or files within it are not writeable.</p>
         <p class="sub1" style="text-align: left">Please read the <a href="readme.html">README file.</a></p>
         <p class="sub1" style="text-align: left">Setup is unable to continue.</p>';
-        exit();
+        exit;
     }
 }
 

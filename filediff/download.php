@@ -13,7 +13,7 @@ if(file_exists($db_file)){
   $db_settings = file($db_file);
 }else{
   echo 'Before you run this file, please save the database settings. Run the file, index1.php';
-  exit(0);
+  exit;
 }
 
 $db_server = trim($db_settings[0]); // database Server 
@@ -46,7 +46,7 @@ if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
      $ftp_pw = trim($decrypted);
 }else{
      'Wrong FTP username or password';
-     exit();
+     exit;
 }
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){

@@ -27,7 +27,7 @@ if(file_exists($db_file)){
   $db_name = trim($db_settings[3]);   // Name of database
 }else{
     echo 'db_settings file not found!';
-    exit();
+    exit;
 }
          
     $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
@@ -63,7 +63,7 @@ if($stop != 'Y'){
 
     mysql_close($con)or exit(mysql_error());
     echo 'Scan complete<br>Total files scanned: '.$total_rows[0].'<br>';
-    //exit();
+    //exit;
 
 }
 

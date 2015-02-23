@@ -45,7 +45,7 @@ if(file_exists($db_file)){
   $db_settings = file($db_file);
 }else{
   echo 'Before you run this file, please save the database settings. Run the file, index1.php';
-  exit(0);
+  exit;
 }
 
 //encrypt / decrypt all these values?
@@ -78,7 +78,7 @@ if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
      $ftp_pw = trim($decrypted);
 }else{
      'Wrong FTP username or password';
-     exit();
+     exit;
 }
 
 build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw,$db_server,$db_user,$db_pass,$db_name,$date,$root_dir);
@@ -172,7 +172,9 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
     if(in_array($OS,$remote_sys)){
       $file_list = raw_list_linux($conn_id,$root_dir,$skip_dir,$excludes);
     }else{
-      $file_list = raw_list_windows($root_dir, $conn_id, $db_server, $db_user, $db_name, $db_pass, $ftp_server);
+      //$file_list = raw_list_windows($root_dir, $conn_id, $db_server, $db_user, $db_name, $db_pass, $ftp_server);
+	  //unsupported operating system
+	  exit;
     }
    
     ftp_close($conn_id); 
@@ -610,58 +612,6 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     print_r($list);
     echo '</pre>';
   */
- 
-function raw_list_windows($folder,$conn_id,$db_server,$db_user,$db_name,$db_pass,$ftp_server){ 
-
-  Global $files;
-
-    $list     = array_filter(ftp_rawlist($conn_id, $folder));
-
-    $file_count  = count($list); 
-    $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_site';
-
-    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
-    mysql_select_db($db_name, $con)or exit(mysql_error());
-    $result = mysql_query("SELECT * FROM $site_table") or exit('MySQL query failed<br>'.mysql_error());
-
-    while($row = mysql_fetch_array($result)){
-       $skip_dir = $row[skip_dir];
-       $skip_file = $row[skip_files];
-    }
-    
-    mysql_close($con)or exit(mysql_error());      
-
-        $skipdir = explode(',',$skip_dir);
-        $skipfile = explode(',',$skip_file);
-
-    $i = 0;
-    while ($i < $file_count){ 
-      $split    = preg_split("/[\s]+/", $list[$i], 9, PREG_SPLIT_NO_EMPTY);
-      array_push($split, $folder);
-
-      $ItemName = $split[8]; 
-      $path     = $folder.'/'.$ItemName;
-      $path_array = explode('/',$path);
-      $extn = strrchr($ItemName,'.');
-      If($extn == ""){ // therefore must be a directory
-          $extn = '#';
-      }
-      $dir_filetype = $folder.'/'.$extn;
-
-     if (substr($list[$i],0,1) == "d" && is_ignored($skipdir,$folder) == 0 && !array_intersect($path_array,$skipdir) && !in_array($folder,$skipdir) 
-              && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".."
-              && !(in_array($ItemName,$skipdir) && substr($list[$i],0,1) == "d")){
-         array_push($files, $split);
-         raw_list_windows($path,$conn_id,$db_server,$db_user,$db_name,$db_pass,$ftp_server); 
-     }elseif (!array_intersect($path_array,$skipdir) && !in_array($folder,$skipdir) && is_ignored($skipdir,$folder) == 0 
-             && !in_array($dir_filetype,$skipfile) && !in_array($ItemName,$skipfile) && !in_array($extn,$skipfile) && $ItemName != "." && $ItemName != ".." 
-             && !(in_array($ItemName,$skipdir) && substr($list[$i],0,1) == "d")){ 
-         array_push($files, $split);
-     }
-      $i++; 
-    }
-    return $files; 
-}
 
 function is_ignored($skipdir,$folder){
     

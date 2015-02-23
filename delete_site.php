@@ -49,25 +49,25 @@ $sth_newlist = $con->prepare("DROP TABLE IF EXISTS `$db_name`.`$newlist_table`")
 if (!$sth_log->execute()) {
     echo('Unable to clear the table - ERROR1!<br>');
     print_r($sth_log->errorInfo());
-    exit();
+    exit;
 }
 
 if (!$sth_site->execute()) {
     echo('Unable to clear the table - ERROR2!<br>');
     print_r($sth_site->errorInfo());
-    exit();
+    exit;
 }
 
 if (!$sth_settings->execute()) {
     echo('Unable to clear the table - ERROR3!<br>');
     print_r($sth_settings->errorInfo());
-    exit();
+    exit;
 }
 
 if (!$sth_newlist->execute()) {
     echo('Unable to clear the table - ERROR4!<br>');
     print_r($sth_newlist->errorInfo());
-    exit();
+    exit;
 }
 
 $con = null;
