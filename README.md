@@ -52,3 +52,6 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [ ] scan logs
 - [ ] htaccess additions protection
 - [ ] use gettext in PHP (if possible) for translation
+- [ ] deploy phpAntiVirus
+- [ ] deploy ZB Block
+- [ ] deploy phpMussel
