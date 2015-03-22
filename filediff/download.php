@@ -50,14 +50,14 @@ if(is_table_empty($settings_table,$db_server,$db_user,$db_pass,$db_name) > 0){
 }
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
-    
-    $con = mysql_connect($db_server,$db_user,$db_pass)or exit('no conn: '.mysql_error());
-    mysql_select_db($db_name, $con)or exit(mysql_error());
-    
-    $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or exit(mysql_error()); 
-    $total_rows = mysql_fetch_row($result);
-    return $total_rows[0];    
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $result = $con->prepare("SELECT COUNT(*) FROM :table_name");
+    $result->bindParam(':table_name', $table_name);
+    $result->execute();
+    $total_rows = $result->fetch(PDO::FETCH_BOTH);
+    $con = null;
+    return $total_rows[0];
 }
 
 header('Content-Type: application/octetstream');  

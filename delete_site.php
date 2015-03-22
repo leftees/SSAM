@@ -27,24 +27,36 @@ if(file_exists($dbsettings)){
     $db_pass = trim($decrypt);
 
 $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+// $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $dom = strstr ($ftp_server,'.'); // seems to be unused
 
-$log_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_log')));
-$site_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_site')));
-$settings_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_settings')));
-$newlist_table = $con->quote('ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_newlist')));
+$log_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_log'));
+$site_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_site'));
+$settings_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_settings'));
+$newlist_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server.'_newlist'));
 
 if(strstr($ftp_server,'-')){
-    $log_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_log')));
-    $site_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_site')));
-    $settings_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_settings')));
-    $newlist_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_newlist')));
+    $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_log'));
+    $site_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_site'));
+    $settings_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_settings'));
+    $newlist_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server.'_newlist'));
 }
 
-$sth_log = $con->prepare("DROP TABLE IF EXISTS `$db_name`.`$log_table`");
-$sth_site = $con->prepare("DROP TABLE IF EXISTS `$db_name`.`$site_table`");
-$sth_settings = $con->prepare("DROP TABLE IF EXISTS `$db_name`.`$settings_table`");
-$sth_newlist = $con->prepare("DROP TABLE IF EXISTS `$db_name`.`$newlist_table`");
+$sth_log = $con->prepare("DROP TABLE IF EXISTS `:db_name`.`:log_table`");
+$sth_log->bindParam(':db_name', $db_name);
+$sth_log->bindParam(':log_table', $log_table);
+
+$sth_site = $con->prepare("DROP TABLE IF EXISTS `:db_name`.`:site_table`");
+$sth_site->bindParam(':db_name', $db_name);
+$sth_site->bindParam(':site_table', $site_table);
+
+$sth_settings = $con->prepare("DROP TABLE IF EXISTS `:db_name`.`:settings_table`");
+$sth_settings->bindParam(':db_name', $db_name);
+$sth_settings->bindParam(':settings_table', $settings_table);
+
+$sth_newlist = $con->prepare("DROP TABLE IF EXISTS `:db_name`.`:newlist_table`");
+$sth_newlist->bindParam(':db_name', $db_name);
+$sth_newlist->bindParam(':newlist_table', $newlist_table);
 
 if (!$sth_log->execute()) {
     echo('Unable to clear the table - ERROR1!<br>');

@@ -33,15 +33,15 @@ if(file_exists($db_file)){
     $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($db_pass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
     
-    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
-    mysql_select_db($db_name, $con)or exit(mysql_error());
-    
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_newlist';
-    $query = "SELECT COUNT(*) FROM $site_table"; 
-    $result2 = mysql_query($query) or exit(mysql_error()); 
-    $total_rows = mysql_fetch_row($result2);
-
-    mysql_close($con)or exit(mysql_error());
+    
+    $result2 = $con->prepare("SELECT COUNT(*) FROM :site_table");
+    $result2->bindParam(':site_table', $site_table);
+    $result2->execute();
+    $total_rows = $result2->fetch(PDO::FETCH_BOTH);
+    $con = null;
 
 if($stop != 'Y'){
    
@@ -54,14 +54,17 @@ if($stop != 'Y'){
     $p = new ProgressBar();
 
 }else{
-    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
-    mysql_select_db($db_name, $con)or exit(mysql_error());
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $site_table = 'ssa_'.stripslashes(str_replace('-','$',str_replace('.','_',$ftp_server))).'_newlist';
-    $query = "SELECT COUNT(*) FROM $site_table"; 
-    $result2 = mysql_query($query) or exit(mysql_error()); 
-    $total_rows = mysql_fetch_row($result2);
 
-    mysql_close($con)or exit(mysql_error());
+    
+    $result2 = $con->prepare("SELECT COUNT(*) FROM :site_table");
+    $result2->bindParam(':site_table', $site_table);
+    $result2->execute();
+    $total_rows = $result2->fetch(PDO::FETCH_BOTH);
+
+    $con = null;
     echo 'Scan complete<br>Total files scanned: '.$total_rows[0].'<br>';
     //exit;
 

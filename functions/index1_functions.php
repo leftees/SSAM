@@ -90,15 +90,14 @@ global $ftp_server;
 }
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
-    
-    $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
-    mysql_select_db($db_name, $con)or exit(mysql_error());
-    
-    $x = "SELECT COUNT(*) FROM $table_name"; 
-    $result = mysql_query($x) or exit('is_table_empty query1: '.mysql_error()); 
-    $total_rows = mysql_fetch_row($result);
-    mysql_close($con)or exit(mysql_error()); 
-    return $total_rows[0];    
+    $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $result = $con->prepare("SELECT COUNT(*) FROM :table_name");
+    $result->bindParam(':table_name', $table_name);
+    $result->execute();
+    $total_rows = $result->fetch(PDO::FETCH_BOTH);
+    $con = null;
+    return $total_rows[0];
 }
 
 function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
@@ -118,7 +117,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     mysql_select_db($db_name, $con)or exit(mysql_error());
 
     // Create table
-	// the path and filename fields should be much longer
+    // the path and filename fields should be much longer
     $newlist_sql = "CREATE TABLE IF NOT EXISTS $newlist_table
     (
     id int NOT NULL AUTO_INCREMENT,
@@ -147,7 +146,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     )";
     // Execute query
     mysql_query($settings_sql,$con)or exit('Failed to create settings table<br>'.mysql_error());
-	// some fields should be longer
+    // some fields should be longer
     $site_sql = "CREATE TABLE IF NOT EXISTS $site_table
     (
     id int NOT NULL AUTO_INCREMENT,
@@ -166,7 +165,7 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
     )";
     // Execute query
     mysql_query($site_sql,$con)or exit('Failed to create site table<br>'.mysql_error());
-	//the file field should be mouch longer
+    //the file field should be mouch longer
     $log_sql = "CREATE TABLE IF NOT EXISTS $log_table
     (
     id int NOT NULL AUTO_INCREMENT,

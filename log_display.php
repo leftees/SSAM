@@ -14,11 +14,11 @@ echo '<table class="tab2" border="1" bordercolor="#ccc">
 
 if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
     $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-    
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $log_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server)).'_log';
     $settings_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server)).'_settings';
     $result = $con->prepare("SELECT * FROM :log_table");
-	$result->bindParam(':log_table', $log_table);
+    $result->bindParam(':log_table', $log_table);
     $result->execute();
     
     while($row = $result->fetch(PDO::FETCH_BOTH)) // default fetch style
@@ -27,7 +27,7 @@ if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_emp
     }
     
     $dir_to_monitor = $con->prepare("SELECT * FROM :settings_table");
-	$result->bindParam(':settings_table', $settings_table);
+    $result->bindParam(':settings_table', $settings_table);
     $dir_to_monitor->execute();
     $dir_to_mon = $dir_to_monitor->fetchAll();
 

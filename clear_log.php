@@ -28,9 +28,10 @@ if(file_exists($dbsettings)){
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $dom = strstr ($ftp_server,'.'); //this is not used
-    $log_table = $con->quote('ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log');
+    $log_table = 'ssa_'.str_replace('-','$',str_replace('.','_',$ftp_server)).'_log';
 
-    $sth = $con->prepare("TRUNCATE TABLE $log_table");
+    $sth = $con->prepare("TRUNCATE TABLE :log_table");
+    $sth->bindParam(':log_table', $log_table);
     if (!$sth->execute()) {
     /*  $sth->execute() */
         echo('Query failed! Please check your database settings and user permissions.<br>');
@@ -60,7 +61,9 @@ if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) == 0) {
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-    $sth = $con->prepare("SELECT COUNT(id) FROM $table_name");
+    // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sth = $con->prepare("SELECT COUNT(id) FROM :table_name");
+    $sth->bindParam(':table_name', $table_name);
     // id (pk) is in PostgreSQL much faster as it uses index only scans, see https://wiki.postgresql.org/wiki/Index-only_scans for more info
     // always use prepared statements and execute for better security, see http://stackoverflow.com/a/4700740/753676 for more info
     $sth->execute();
