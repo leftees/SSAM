@@ -395,7 +395,7 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                     $modified++;
                 }
                 // optimize and create additional variable instead of using $modified
-                if((($date_newlist != $date_oldlist) || ($time_newlist != $time_oldlist)) && $size_newlist = $size_oldlist && $newlist[$file]['path'] != "" && $oldlist[$file]['path'] != ""){
+                if((($date_newlist != $date_oldlist) || ($time_newlist != $time_oldlist)) && $size_newlist == $size_oldlist && $newlist[$file]['path'] != "" && $oldlist[$file]['path'] != ""){
                     print 'File date or time changed: '.$file.' - Old date '.$date_oldlist.' New date '.$date_newlist.' Old time: '.$time_oldlist.' New time: '.$time_newlist."\r\n";
                     $email_text .= 'File date or time changed: '.$file."\r\n".'Old date '.$date_oldlist.' New date '.$date_newlist.' Old time: '.$time_oldlist.' New time: '.$time_newlist."\r\n\n";
                     mysql_query("INSERT INTO $log_prefix
