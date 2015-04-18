@@ -173,8 +173,8 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
       $file_list = raw_list_linux($conn_id,$root_dir,$skip_dir,$excludes);
     }else{
       //$file_list = raw_list_windows($root_dir, $conn_id, $db_server, $db_user, $db_name, $db_pass, $ftp_server);
-	  //unsupported operating system
-	  exit;
+      //unsupported operating system
+      exit;
     }
    
     ftp_close($conn_id); 
@@ -280,17 +280,17 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
         }
         
         $conn_id = @ftp_connect($ftp_server);
-		if(!$conn_id){
-			exit("Unable to establish an FTP connection");
-		}
+        if(!$conn_id){
+            exit("Unable to establish an FTP connection");
+        }
         if(@ftp_login($conn_id, $ftp_user, $ftp_pw)){
-		}
-		else {
-			//send mail if login fails
-			$headers = 'From: '.$email_from_addr . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+        }
+        else {
+            //send mail if login fails
+            $headers = 'From: '.$email_from_addr . "\r\n" . 'X-Mailer: PHP/' . phpversion();
             mail($email_alert_addr, $email_subject, "ftp-login failed - User name or password not correct", $headers); //Simple mail function for alert.
-			exit("ftp-login failed - User name or password not correct");
-		}
+            exit("ftp-login failed - User name or password not correct");
+        }
         @ftp_pasv ( $conn_id, true ) or exit("Unable to set FTP passive mode."); //Use passive mode for client-side action
        
         $added = 0;
@@ -325,6 +325,10 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
        
             $file = trim($path.'/'.$file_name);
 
+            $date_newlist = $newlist[$file]['date'];
+            $date_oldlist = $oldlist[$file]['date'];
+            $time_newlist = $newlist[$file]['time'];
+            $time_oldlist = $oldlist[$file]['time'];
             $size_newlist = $newlist[$file]['size'];
             $size_oldlist = $oldlist[$file]['size'];
             $new_perms = convert_perms($newlist[$file]['perms']);
@@ -368,6 +372,32 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
                 if($size_newlist != $size_oldlist && $newlist[$file]['path'] != "" && $oldlist[$file]['path'] != ""){
                     print 'File modified: '.$file.' - Date '.$row2[4].' Time: '.$row2[5].' Old file size = '.$size_oldlist.'bytes. New file size = '.$size_newlist.'bytes'."\r\n";
                     $email_text .= 'File modified: '.$file."\r\n".'Date '.$row2[4].' Time: '.$row2[5].' Old file size = '.$size_oldlist.'bytes. New file size = '.$size_newlist."bytes.\r\n\n";
+                    mysql_query("INSERT INTO $log_prefix
+                        (status,
+                            file,
+                            date,
+                            time,
+                            old_perms,
+                            new_perms,
+                            old_size,
+                            new_size,
+                            last_run) 
+                            VALUES ('Modified',
+                                '$file',
+                                '$row2[4]',
+                                '$row2[5]',
+                                '$old_perms',
+                                '$new_perms',
+                                '$size_oldlist',
+                                '$size_newlist',
+                                '$date')")or exit(mysql_error()); 
+                    $i++;
+                    $modified++;
+                }
+
+                if((($date_newlist != $date_oldlist) or ($time_newlist != $time_oldlist)) && $newlist[$file]['path'] != "" && $oldlist[$file]['path'] != ""){
+                    print 'File date or time changed: '.$file.' - Old date '.$date_oldlist.' New date '.$date_newlist.' Old time: '.$time_oldlist.' New time: '.$time_newlist."\r\n";
+                    $email_text .= 'File date or time changed: '.$file."\r\n".'Old date '.$date_oldlist.' New date '.$date_newlist.' Old time: '.$time_oldlist.' New time: '.$time_newlist."\r\n\n";
                     mysql_query("INSERT INTO $log_prefix
                         (status,
                             file,
@@ -603,13 +633,13 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                                 $item['filename']) = $parts;
                                 /*
                                     we just need the timestamp in the database instead of date and time
-									
-									calculate timestamp and calculate the numeric values of day, month and year
-									$item['timestamp'] = strtotime(implode(' ', array($item['month'], $item['day'], $item['year_time'])));
+                                    
+                                    calculate timestamp and calculate the numeric values of day, month and year
+                                    $item['timestamp'] = strtotime(implode(' ', array($item['month'], $item['day'], $item['year_time'])));
                                     $item['year'] = date("Y",$item['timestamp']);
                                     $item['month'] = date("m",$item['timestamp']);
                                     $item['day'] = date("d",$item['timestamp']);
-									
+                                    
                                     see http://stackoverflow.com/a/10207358/753676 for more infos
                                 */
                                 $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file?

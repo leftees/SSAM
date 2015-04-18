@@ -25,6 +25,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.ter
 - [x] drop Windows support
 
 ##Planned (structural changes needed)
+- [ ] compare file hashes (md5sum, sha1sum) if possible (SSH version)
 - [ ] create a dashboard for an overview of all monitored websites
 - [ ] integrate code for scanning files for webshells, malware and other malicious (hidden/obfuscated) code
 - [ ] backup function for settings, websites and so on
