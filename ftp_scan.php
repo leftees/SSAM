@@ -628,7 +628,7 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                                     if it is older than 12 months, the year is used instead of the time string 
                                     see http://php.net/manual/en/function.ftp-rawlist.php
                                     
-                                    use $item['year_time'] instead of $item['year']
+                                    rename to $item['year_time'] instead of $item['year']
                                 */
                                 $item['filename']) = $parts;
                                 /*
@@ -641,6 +641,13 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                                     $item['day'] = date("d",$item['timestamp']);
                                     
                                     see http://stackoverflow.com/a/10207358/753676 for more infos
+                                */
+                                /*
+                                    optionally use filemtime(), filectime(), ftp_mdtm() for timestamp
+                                    may increase needed time
+
+                                    http://en.wikipedia.org/wiki/List_of_FTP_commands
+                                    http://stackoverflow.com/questions/1310212/php-ftp-mdtm-not-support-by-server
                                 */
                                 $item['type'] = $parts[0]{0} === 'd' ? 'directory' : 'file';  // is 'type' a directory or a file?
 
