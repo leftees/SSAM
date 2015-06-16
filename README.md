@@ -7,7 +7,7 @@ SSAM
 
 [![Build Status](https://travis-ci.org/DanielRuf/SSAM.svg?branch=master)](https://travis-ci.org/DanielRuf/SSAM)
 
-security oriented fork of SSAM (Simple Site Audit Multisite) simplesiteaudit.terryheffernan.net - early WIP
+security oriented fork of SSAM (Simple Site Audit Multisite) http://simplesiteaudit.terryheffernan.net - early WIP
 
 
 ##Todo (no structural changes needed)
