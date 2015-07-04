@@ -38,7 +38,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) http://simplesiteau
 - [ ] use semantic versioning (SemVer)
 - [ ] generate statistics from database
 - [ ] use MySQL query caching
-- [ ] monitor databases for changes
+- [ ] monitor databases for changes using CHECKSUM TABLE tbl_name [, tbl_name] ... [ QUICK | EXTENDED ]
 - [ ] translate strings and use constants
 - [ ] send more mails, when something fails (if enabled)
 - [ ] improve database (use InnoDB as engine, set default charset to UTF-8)
