@@ -10,3 +10,13 @@ ftps? (ftp + ssl?) ftp_ssl_connect
 
 
 monitor email, spam & malware (attachments)?
+
+block all  IPs but whitelist server IP and own IP
+
+SetEnvIfNoCase X-Forwarded-For 1.1.1.1 allow
+SetEnvIfNoCase CF-Connecting-IP 1.1.1.1 allow
+(serverip + own ip)
+
+order deny,allow
+deny from all
+allow from env=allow
