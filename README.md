@@ -56,3 +56,4 @@ security oriented fork of SSAM (Simple Site Audit Multisite) http://simplesiteau
 - [ ] deploy phpAntiVirus
 - [ ] deploy ZB Block
 - [ ] deploy phpMussel
+- [ ] support rotation of encryption key
