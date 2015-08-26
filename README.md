@@ -44,7 +44,7 @@ security oriented fork of SSAM (Simple Site Audit Multisite) http://simplesiteau
 - [ ] improve database (use InnoDB as engine, set default charset to UTF-8)
 - [ ] use prepared statements
 - [ ] scan for CVE
-- [ ] scan WP plugins for vunlerabilities and exploits
+- [ ] scan WP plugins for vulnerabilities and exploits
 - [ ] add news section (per website) with RSS feeds (manage, show, import, export)
 - [ ] export data/views to CSV, TSV, JSON, XML and PDF
 - [ ] add uptime monitor
