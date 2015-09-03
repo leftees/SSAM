@@ -1,10 +1,10 @@
 <?php
-function logout() {
+/*function logout() {
     header('WWW-Authenticate: Basic realm="'.time().'"');
     header('HTTP/1.0 401 Unauthorized');
     echo "You need to enter a valid username and password.";
     exit;
-}
+}*/
 logout2();
 
 function logout2() {
