@@ -75,7 +75,7 @@ $start = $time;
              echo '<tr id="selected" style="background-color:'.$bgcolor.';">';
       
              $file_name = trim(stristr ($file_name,'/'));
-      
+            // use right protocol, https or http
              if(@file_get_contents("http://".$ftp_server.$file_name, NULL, NULL, 0, 1)){// Test if file is downloadable, map client address to real address, download.php should always work
                        $img = 'images/arrow_down_blue.gif';
                        $alt = 'Download this file for comparison with backup file.';
