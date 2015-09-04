@@ -1,6 +1,24 @@
 <?php
 //include '../version.php'; //not needed as version.php is included before index1_functions.php
-// Functions start here  
+// Functions start here 
+function checkSSL($domain){
+	$ch = curl_init("http://".$domain);
+	curl_setopt($ch, CURLOPT_NOBODY, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_exec($ch);
+	$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	$port = curl_getinfo($ch, CURLINFO_PRIMARY_PORT);
+	$domain = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+	if($port == 443 && $code == 200){
+		$status = true;
+	}else{
+		$status = false;
+	}
+	curl_close($ch);
+	return $status;
+}
+
 function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir) {
 
     $date = date ("dMy");
