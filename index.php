@@ -468,7 +468,7 @@ if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) == 0 && $_G
 echo '</div>';
 
      echo '</form>';
-echo '<![if !IE]><br /><br /><center><![endif]><br><small>SSA v'.$ssa_ver.' | Check for the <a target="_blank" href="http://simplesiteaudit.terryheffernan.net/">latest version</a><![if !IE]></center><br /><![endif]>
+echo '<![if !IE]><br /><br /><center><![endif]><br><small>SSA v'.$ssa_ver.' | Check for the <a target="_blank" href="http://simplesiteaudit.terryheffernan.net/">latest version</a> | <a href="logout.php">Logout</a><![if !IE]></center><br /><![endif]>
       <!--Paypal form-->
 <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">

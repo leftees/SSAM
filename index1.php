@@ -306,7 +306,7 @@ if(file_exists($dbsettings)){
     
 echo '</form>';
     
-echo '<![if !IE]><br /><br /><![endif]><small style="text-align: left">SSAM v'.$ssa_ver.' | Check for the <a target="_blank" href="http://simplesiteaudit.terryheffernan.net/">latest version</a></small>
+echo '<![if !IE]><br /><br /><![endif]><small style="text-align: left">SSAM v'.$ssa_ver.' | Check for the <a target="_blank" href="http://simplesiteaudit.terryheffernan.net/">latest version</a> | <a href="logout.php">Logout</a></small>
 
 <!--Paypal form-->
 <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
