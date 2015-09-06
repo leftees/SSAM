@@ -99,10 +99,8 @@ global $ftp_server;
     foreach(glob($logs_dir.'/*', GLOB_ONLYDIR) as $dir){ 
         $dir = basename($dir);
         if(stripos($dir,".") != FALSE){
-			if($dir == $ftp_server)
-			$html .= '<option value='.$dir. ' selected>' .$dir. '</option>';	
-			else
-           $html .= '<option value='.$dir. '>' .$dir. '</option>';
+			if($dir == $ftp_server) $html .= '<option value='.$dir. ' selected>' .$dir. '</option>';	
+			else $html .= '<option value='.$dir. '>' .$dir. '</option>';
         }
     }
     $html .= '</select>';

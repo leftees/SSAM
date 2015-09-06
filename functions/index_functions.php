@@ -31,13 +31,13 @@ function simple_prg($start_prg = false, $request_uri = null) {
 function Select($logs_dir, $name) {
 global $ftp_server;
 
-    $html = '<select class="dropdown" name="'.$name.'" onchange="location.href=\'index.php?load_start_file=N&server=\'+this.value">';
-    $html .= '<option selected>'.$ftp_server.'</option>';
+    $html = '<select class="dropdown" name="'.$name.'" onchange="location.href=\'index1.php?load_start_file=N&server=\'+this.value">';
 
     foreach(glob($logs_dir.'/*', GLOB_ONLYDIR) as $dir){ 
-        $dir = basename($dir); 
+        $dir = basename($dir);
         if(stripos($dir,".") != FALSE){
-           $html .= '<option value='.$dir. '>' .$dir. '</option>';
+			if($dir == $ftp_server) $html .= '<option value='.$dir. ' selected>' .$dir. '</option>';	
+			else $html .= '<option value='.$dir. '>' .$dir. '</option>';
         }
     }
     $html .= '</select>';
