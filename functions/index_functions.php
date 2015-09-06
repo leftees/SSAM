@@ -13,7 +13,7 @@ function simple_prg($start_prg = false, $request_uri = null) {
 
         $header = "Location: " . $_SERVER[$request_uri] . '?prg=1&uniqid=' . $uniqid;
         header($header);
-        die;
+        exit;
     }
 
     if ($start_prg) {
