@@ -18,5 +18,6 @@ chmod( $img , 0777 );
 $i++;
 }
 header("Location: diffs.php?file1=".$file1."&file2=".$file2."");
+exit;
 //echo '<a href="diffs.php?file1='.$file1.'&file2='.$file2.'">Compare</a>'
 ?>

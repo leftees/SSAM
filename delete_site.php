@@ -96,6 +96,7 @@ if(file_exists($dbsettings)){
 
 if (!file_exists($dbsettings) && !file_exists($dbsettings_dir)) {
     header("Location: index1.php?site_deleted=1");// server=$ftp_server&
+	exit;
 }else{
     echo 'Unable to delete. Please delete manually';  
 }

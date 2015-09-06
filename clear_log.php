@@ -55,6 +55,7 @@ if(file_exists($dbsettings)){
 
 if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) == 0) {
     header("Location: index.php?server=$ftp_server&fileEmptied=1");
+	exit;
 }else{
     echo 'Unable to clear log. Please check your database settings and user permissions.';  
 }

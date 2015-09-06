@@ -54,6 +54,7 @@ if(file_exists($dbsettings)){
     $db_pass = trim($decrypt);
 }else{
     header("Location: index1.php");
+	exit;
 }
 
 // Clear history of POST variables, so that browser doesn't object to a refresh.
