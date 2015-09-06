@@ -72,8 +72,10 @@ $includeFile   = file_get_contents("ftp://".$ftp_user.":".$ftp_pw."@".$ftp_serve
 }
 catch(Exception $e){
 if (empty($root_dir)){
+// use right protocol, https or http
 $includeFile = file_get_contents("http://".$ftp_server.$file);
 } else {
+// use right protocol, https or http
 $includeFile = file_get_contents("http://".$ftp_server.'/'.$root_dir.$file);
 }
 }
