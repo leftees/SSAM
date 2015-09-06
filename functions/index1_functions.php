@@ -95,11 +95,13 @@ function Select($logs_dir, $name) {
 global $ftp_server;
 
     $html = '<select class="dropdown" name="'.$name.'" onchange="location.href=\'index1.php?load_start_file=N&server=\'+this.value">';
-    $html .= '<option selected>'.$ftp_server.'</option>';
 
     foreach(glob($logs_dir.'/*', GLOB_ONLYDIR) as $dir){ 
         $dir = basename($dir);
         if(stripos($dir,".") != FALSE){
+			if($dir == $ftp_server)
+			$html .= '<option value='.$dir. ' selected>' .$dir. '</option>';	
+			else
            $html .= '<option value='.$dir. '>' .$dir. '</option>';
         }
     }
