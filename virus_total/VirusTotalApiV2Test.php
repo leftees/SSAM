@@ -11,10 +11,10 @@ include '../version.php';
 <link href="../css/simplesiteaudit.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<p class="sub2" style="text-align:left;margin:15px"><font color="maroon">SimpleSiteAudit<label> Multisite v<?print $ssa_ver?></label></font><br>Malware Scan results
+<p class="sub2" style="text-align:left;margin:15px"><font color="maroon">SimpleSiteAudit<label> Multisite v<?php echo $ssa_ver?></label></font><br>Malware Scan results
 <input type="button" id="close" onclick="window.close()" style="width: auto; background-color: #ffffff;" name="close" title="Close this window" alt="Close this window" value="Close">
 </p>
-<?
+<?php
 
 require_once('VirusTotalApiV2.php');
 
@@ -29,7 +29,7 @@ print_r($scan_result);
 echo '</pre>';*/
 $exclude = array();
 $exclude = array(permalink,response_code,scan_id,verbose_msg,filescan_id,positives,total);
-?><table class="tab6"><tr><?
+?><table class="tab6"><tr><?php
 foreach($scan_result as $key=>$value){
     
     if(is_array($value)){
@@ -52,7 +52,7 @@ foreach($scan_result as $key=>$value){
       }
     }
 }
-?></tr></table></body></html><?
+?></tr></table></body></html><?php
 
 function object_2_array($result) 
 { 
