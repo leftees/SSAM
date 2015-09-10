@@ -1,5 +1,5 @@
 <?php 
-    private function parseRawList($rawList) 
+    function parseRawList($rawList) 
     { 
       //if you want the dots (. & ..) set this variable to 0 
       $start = 2; 
