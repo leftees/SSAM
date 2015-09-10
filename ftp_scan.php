@@ -57,7 +57,7 @@ $db_name = trim($db_settings[3]);   // Name of database
     $decrypt = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($encryption_key), base64_decode($dbpass), MCRYPT_MODE_CBC, md5(md5($encryption_key))), "\0");
     $db_pass = trim($decrypt);
 
-if($ftp_server != "" && $ftp_server != null && $db_server != ""/* && $is_table_empty() > 0*/){
+if($ftp_server !== "" && $ftp_server !== null && $db_server !== ""/* && $is_table_empty() > 0*/){
     $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
     mysql_select_db($db_name, $con)or exit(mysql_error());
     
