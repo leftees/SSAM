@@ -12,7 +12,7 @@ echo '<a name="1"></a>';// bookmark for files that can't be downloaded
 echo '<table class="tab2" border="1" bordercolor="#ccc">
       <tr><td colspan="9">'.$contents_header.'</td></tr>';
 
-if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
+if($ftp_server !== "" && $ftp_server !== null && $db_server !== "" && $is_table_empty > 0){
     $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     // $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $log_table = 'ssa_'.str_replace('-','_',str_replace('.','_',$ftp_server)).'_log';
