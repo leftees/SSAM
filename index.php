@@ -73,7 +73,7 @@ if($db_server != ""){
 $is_table_empty = is_table_empty($site_table,$db_server,$db_user,$db_pass,$db_name);
 }
 
-if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
+if($ftp_server !== "" && $ftp_server !== null && $db_server !== "" && $is_table_empty > 0){
     $con = @mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error())or exit('Unable to connect to MySQL server: '.$db_server.'<br>Please check that the following details are correct:<br>
         db server name<br>
         db user name<br>
@@ -568,7 +568,7 @@ echo '<a name="1"></a>';// bookmark for files that can't be downloaded
 echo '<table class="tab2" border="1" bordercolor="#ccc">
       <tr><td colspan="9">'.$contents_header.'</td></tr>';
 
-if($ftp_server != "" && $ftp_server != null && $db_server != "" && $is_table_empty > 0){
+if($ftp_server !== "" && $ftp_server !== null && $db_server !== "" && $is_table_empty > 0){
     $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
     mysql_select_db($db_name, $con)or exit(mysql_error());
     
