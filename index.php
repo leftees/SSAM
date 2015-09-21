@@ -623,18 +623,9 @@ echo '<tr><td colspan="8" style="padding: 3px;font-size:12px;"><b>Web site:</b> 
       
              $file_name = trim(stristr ($file_name,'/'));
         
-      
-             if($status == "Modified" || $status == "Added"){
-               $img = 'images/arrow_down_blue.gif';
-               $alt = 'Download this file for comparison with backup file.';
-               $ttl = 'Download this file for comparison with backup file.';
-               $href = "filediff/download.php?file=$file_name&server=$ftp_server";
-               echo '<td style="padding: 1px;">'.$status.'<a href="'.$href.'" /><img class="noPrint" title="'.$ttl.'" alt="'.$alt.'"src="'.$img.'" /></td>';
-               echo '<td style="padding: 1px; width: auto;"><img border="0" src="images/spacer.gif" width="3" height="0">'.$file_name.'</td>';
-             }else{
-               echo '<td style="padding: 4px;">'.$status.'</td>';
-               echo '<td style="padding: 4px; width: auto;">'.$file_name.'</td>';
-             }
+
+             echo '<td style="padding: 4px;">'.$status.'</td>';
+             echo '<td style="padding: 4px; width: auto;">'.$file_name.'</td>';
              echo '<td style="padding: 4px; width: auto;">'.$file_date.'</td>';
              echo '<td style="padding: 4px; width: 110px;">'.$file_time.'</td>';
              echo '<td style="padding: 4px; width: auto;">'.$old_perms.'</td>';
