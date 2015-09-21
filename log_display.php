@@ -10,7 +10,7 @@ if (is_table_empty($log_table,$db_server,$db_user,$db_pass,$db_name) > 0 && $log
 }
 echo '<a name="1"></a>';// bookmark for files that can't be downloaded
 echo '<table class="tab2" border="1" bordercolor="#ccc">
-      <tr><td colspan="9">'.$contents_header.'</td></tr>';
+      <tr><td colspan="9">'.$contents_header.'</td></tr>';do
 
 if($ftp_server !== "" && $ftp_server !== null && $db_server !== "" && $is_table_empty > 0){
     $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -75,28 +75,9 @@ $start = $time;
              echo '<tr id="selected" style="background-color:'.$bgcolor.';">';
       
              $file_name = trim(stristr ($file_name,'/'));
-            // use right protocol, https or http
-             if(@file_get_contents("http://".$ftp_server.$file_name, NULL, NULL, 0, 1)){// Test if file is downloadable, map client address to real address, download.php should always work
-                       $img = 'images/arrow_down_blue.gif';
-                       $alt = 'Download this file for comparison with backup file.';
-                       $ttl = 'Download this file for comparison with backup file.';
-                       $href = "filediff/download.php?file=$file_name&server=$ftp_server";
-             }else{
-                       $img = 'images/button_cancel.png';
-                       $alt = 'Remote server returned an error. I am unable to download this file.';
-                       $ttl = 'Remote server returned an error. I am unable to download this file.';
-                       $href = "#1";
-             }
-             
-             
-      
-             if($status == "Modified"){
-               echo '<td style="padding: 1px;">'.$status.'<a href="'.$href.'" /><img title="'.$ttl.'" alt="'.$alt.'"src="'.$img.'" /></td>';
-               echo '<td style="padding: 1px; width: auto;"><img border="0" src="images/spacer.gif" width="3" height="0">'.$file_name.'</td>';
-             }else{
-               echo '<td style="padding: 4px;">'.$status.'</td>';
-               echo '<td style="padding: 4px; width: auto;">'.$file_name.'</td>';
-             }
+
+             echo '<td style="padding: 4px;">'.$status.'</td>';
+             echo '<td style="padding: 4px; width: auto;">'.$file_name.'</td>';
              echo '<td style="padding: 4px; width: auto;">'.$file_date.'</td>';
              echo '<td style="padding: 4px; width: 110px;">'.$file_time.'</td>';
              echo '<td style="padding: 4px; width: auto;">'.$old_perms.'</td>';
