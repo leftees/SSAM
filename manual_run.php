@@ -1,5 +1,8 @@
 <?php
 header('Content-type: text/html');
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 $date = date ("dMy@H:i:s");
 //include 'version.php';
 //error_reporting (E_ALL ^ E_NOTICE);
