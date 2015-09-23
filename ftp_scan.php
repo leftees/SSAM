@@ -586,8 +586,8 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
             $file = '';
            
             foreach ($file_list as $value) {
-                  if((strpos($value,'/') || substr($value, -1)==":") && $item['type']=="directory"){
-                    $item['path'] = str_replace(':','',$value);
+                  if(substr($value, -1)==":" && $item['type']=="directory"){
+                    $item['path'] = substr($value, 0, -1);
                   }
                   
                   if($item['path'] == ''){
