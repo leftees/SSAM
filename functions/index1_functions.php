@@ -19,7 +19,7 @@ function checkSSL($domain){
 	return $status;
 }
 
-function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir) {
+function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir, $encryption_key) {
 
     if(substr($root_dir, 0, 1)!=="/")$root_dir="/".$root_dir;
     $date = date ("dMy");
