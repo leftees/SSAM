@@ -2,8 +2,8 @@
 
 function simple_prg($start_prg = false, $request_uri = null) {
     // check to see if we should start prg
+    $uniqid = uniqid();
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $uniqid = uniqid();
         $_SESSION['post'][$uniqid] = $_POST;
         if (!$request_uri) {
             $request_uri = 'REQUEST_URI';
