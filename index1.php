@@ -115,7 +115,7 @@ if(is_resource ($result) && !$_POST['submit']){
 }
 
      if($_POST['submit']){
-       store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir);
+       store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $ftp_server, $ftp_user, $ftp_pass, $logs_dir, $root_dir, $encryption_key);
      }
  } 
  
