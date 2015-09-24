@@ -72,11 +72,6 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
     mysql_query($query)or exit('Query failed:<br />'.mysql_error());
     mysql_close($con)or exit(mysql_error());
 }
-
-function isit_dir($dir){
-    $count = (count(glob("$dir/*",GLOB_ONLYDIR)));
-    return $count;
-}
                   
 function Select($logs_dir, $name) {
 global $ftp_server;
