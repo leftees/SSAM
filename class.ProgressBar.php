@@ -34,7 +34,7 @@ ini_set('output_buffering', '0');
 	function getContent() {
 		$this->percentDone = floatval($this->percentDone);
 		$percentDone = number_format($this->percentDone, $this->decimals, '.', '') .'%';
-		$content .= '<div id="'.$this->pbid.'" class="pb_container">
+		$content = '<div id="'.$this->pbid.'" class="pb_container">
 			<div id="'.$this->textid.'" class="'.$this->textid.'">'.$percentDone.'</div>
 			<div class="pb_bar">
 				<div id="'.$this->pbarid.'" class="pb_before"
