@@ -66,8 +66,8 @@ function displayString($log) {
     }
     return $string;
 }
-
-function refresh_logview() {
+// refresh_logview() seems to be unused
+function refresh_logview($logs_dir) {
     $log_contents = array();
     if (file_exists($logs_dir . '/ssa_output.txt')) {
         $log_contents = file($logs_dir . '/ssa_output.txt'); // Parse the contents of ssa_output.txt into an array
