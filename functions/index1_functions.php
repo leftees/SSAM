@@ -11,7 +11,7 @@ function checkSSL($domain){
 	$port = curl_getinfo($ch, CURLINFO_PRIMARY_PORT);
 	$domain = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 	if($port == 443 && $code == 200){
-		$status = true;
+		$status = true;is
 	}else{
 		$status = false;
 	}
@@ -71,20 +71,6 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
 
     mysql_query($query)or exit('Query failed:<br />'.mysql_error());
     mysql_close($con)or exit(mysql_error());
-}
-
-function is_removeable($dir) {
-    $folder = opendir($dir);
-
-    while ($settings_file = readdir($folder))
-        if ($settings_file != '.' && $settings_file != '..' &&
-                (!is_writable($dir . "/" . $settings_file) ||
-                ( is_dir($dir . "/" . $settings_file) && !is_removeable($dir . "/" . $settings_file) ) )) {
-            closedir($folder);
-            return false;
-        }
-    closedir($folder);
-    return true;
 }
 
 function isit_dir($dir){
