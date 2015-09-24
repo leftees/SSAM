@@ -580,12 +580,21 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
   function raw_list_linux($resource, $directory,$skipdir,$excludes) {
       global $items;
 
+        if(substr($directory, 0, 1)!=="/")$directory="/".$directory;
         if (is_array($file_list = array_filter(ftp_rawlist($resource, "-a ".$directory, true)))) {       
             $keys = array('day', 'filename', 'group', 'month', 'number', 'path', 'perms', 'size', 'type', 'user', 'year');
             $item = array_fill_keys($keys, '');
             $file = '';
            
             foreach ($file_list as $value) {
+                  if(substr($value, 0, 1)=="/" || substr($value, -1)==":"){
+                    $item['path'] = substr($value, 0, -1);
+                  }
+                  
+                  if($item['path'] == ''){
+                       $item['path'] = $directory;
+                  }
+
                   $parts = preg_split("/\s+/", $value);
 
                   if(count($parts) > 9){
@@ -594,14 +603,6 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                           $parts[8] = $parts[8].' '.$parts[$i];
                           $i++;
                       }
-                  }
-
-                  if(!isset($parts[8])){
-                    $item['path'] = substr($value, 0, -1);
-                  }
-                  
-                  if($item['path'] == ''){
-                       $item['path'] = $directory;
                   }
 
                   if(isset($parts[8]) && isset($item)){
