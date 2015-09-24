@@ -1,6 +1,7 @@
 <?php 
     function parseRawList($rawList) 
     { 
+      $parsedList=array();
       //if you want the dots (. & ..) set this variable to 0 
       $start = 2; 
       //specify the order of the contents here 
