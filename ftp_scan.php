@@ -586,14 +586,6 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
             $file = '';
            
             foreach ($file_list as $value) {
-                  if(substr($value, -1)==":" && $item['type']=="directory"){
-                    $item['path'] = substr($value, 0, -1);
-                  }
-                  
-                  if($item['path'] == ''){
-                       $item['path'] = $directory;
-                  }                
-               
                   $parts = preg_split("/\s+/", $value);
 
                   if(count($parts) > 9){
@@ -603,7 +595,15 @@ function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
                           $i++;
                       }
                   }
-                    
+
+                  if(!isset($parts[8])){
+                    $item['path'] = substr($value, 0, -1);
+                  }
+                  
+                  if($item['path'] == ''){
+                       $item['path'] = $directory;
+                  }
+
                   if(isset($parts[8]) && isset($item)){
 
                      $extn = strrchr($parts[8],'.');
