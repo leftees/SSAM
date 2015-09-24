@@ -11,7 +11,7 @@ function checkSSL($domain){
 	$port = curl_getinfo($ch, CURLINFO_PRIMARY_PORT);
 	$domain = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 	if($port == 443 && $code == 200){
-		$status = true;is
+		$status = true;
 	}else{
 		$status = false;
 	}
