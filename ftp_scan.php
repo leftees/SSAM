@@ -100,7 +100,10 @@ function build_lists($logs_dir, $ftp_server, $ftp_user, $ftp_pw ,$db_server,$db_
     global $remote_sys_type;
     global $start;
     $remote_sys = explode(',',$remote_sys_type);
-
+    $email_subject="";
+    $email_header="";
+    $email_from_addr="";
+    $email_alert_addr="";
     $con = mysql_connect($db_server,$db_user,$db_pass)or exit(mysql_error());
     mysql_select_db($db_name, $con)or exit(mysql_error());
     
