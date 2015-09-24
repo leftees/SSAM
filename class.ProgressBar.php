@@ -6,14 +6,14 @@
  */
 
 class ProgressBar {
-	var $percentDone = 0;
+	var $percentDone = 0.0;
 	var $pbid;
 	var $pbarid;
 	var $tbarid;
 	var $textid;
 	var $decimals = 1;
 
-	function __construct($percentDone = 0) {
+	function __construct($percentDone = 0.0) {
 		$this->pbid = 'pb';
 		$this->pbarid = 'progress-bar';
 		$this->tbarid = 'transparent-bar';
