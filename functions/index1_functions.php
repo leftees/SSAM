@@ -72,22 +72,6 @@ function store_details($db_server, $db_user, $db_pass, $db_name, $dbsettings, $f
     mysql_query($query)or exit('Query failed:<br />'.mysql_error());
     mysql_close($con)or exit(mysql_error());
 }
-                  
-function Select($logs_dir, $name) {
-global $ftp_server;
-
-    $html = '<select class="dropdown" name="'.$name.'" onchange="location.href=\'index1.php?load_start_file=N&server=\'+this.value">';
-
-    foreach(glob($logs_dir.'/*', GLOB_ONLYDIR) as $dir){ 
-        $dir = basename($dir);
-        if(stripos($dir,".") != FALSE){
-			if($dir == $ftp_server) $html .= '<option value='.$dir. ' selected>' .$dir. '</option>';	
-			else $html .= '<option value='.$dir. '>' .$dir. '</option>';
-        }
-    }
-    $html .= '</select>';
-    return  $html;
-}
 
 function is_table_empty($table_name,$db_server,$db_user,$db_pass,$db_name){
     $con = new PDO('mysql:host='.$db_server.';dbname='.$db_name.';charset=utf8', $db_user, $db_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
