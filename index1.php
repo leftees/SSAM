@@ -170,7 +170,7 @@ margin: 0;
 padding: 1;
 width: auto;
 overflow: visible;
-align: absmiddle;
+vertical-align: middle;
 }
 input.text{
 width:350px;
