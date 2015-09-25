@@ -17,10 +17,10 @@ engines:
   fixme:
     enabled: true
 
- ratings:
-   paths:
-   - "**.php"
-   - functions/**
+ratings:
+  paths:
+  - "**.php"
+  - functions/**
 #exclude_paths:
 #- spec/**/*
 #- vendor/**/*
