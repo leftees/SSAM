@@ -169,4 +169,3 @@ function create_db($db_user,$db_server,$db_pass,$db_name,$ftp_server){
 
     mysql_close($con)or exit(mysql_error());
 }
-?>
